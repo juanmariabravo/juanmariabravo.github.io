@@ -1,9 +1,11 @@
-# 🌐 Mi Portfolio Personal
+# 🌐 Portfolio de Juan María Bravo López 
 
 Este repositorio contiene el código fuente de mi portfolio personal, creado a partir de la plantilla **[iPortfolio de BootstrapMade](https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/)** y personalizado con mi información académica, experiencia y proyectos.
 
 ## 🚀 Accede a mi portfolio y conoce más sobre mí
 #### 👉 [Visita mi portfolio aquí](https://juanmariabravo.github.io)
+
+#### 📃 [Accede a mi CV en formato PDF](https://juanmariabravo.github.io/assets/cvs/JuanMariaBravo_CV.pdf)
 
 ### 📌 Sobre mí
 Soy estudiante de último curso del **Grado en Ingeniería Informática** en la Universidad de Castilla-La Mancha.  
