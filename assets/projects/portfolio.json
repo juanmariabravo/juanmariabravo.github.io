@@ -10,8 +10,8 @@
       "url": "https://github.com/juanmariabravo/gramola-spotify-2025",
       "demo": "",
       "description": "<p>Aplicación web que integra la API de Spotify para simular una gramola de bar, permitiendo añadir canciones a la reproducción actual de Spotify, seleccionar dispositivos de reproducción, etc.</p><p>Desarrollada con tecnologías web modernas para ofrecer una experiencia de usuario fluida y reactiva.</p>",
-      "images": ["assets/img/portfolio/gramola_esipotify.png"],
-      "thumbnail": "assets/img/portfolio/gramola_esipotify.png",
+      "images": ["assets/img/portfolio/gramola-esipotify-1.png", "assets/img/portfolio/gramola-esipotify-2.png", "assets/img/portfolio/gramola-esipotify-3.png", "assets/img/portfolio/gramola-esipotify-4.png", "assets/img/portfolio/gramola-esipotify-5.png"],
+      "thumbnail": "assets/img/portfolio/gramola-esipotify-1.png",
       "technologies": ["Angular", "Spring Boot", "MySQL", "Spotify API", "HTML5", "CSS3", "TypeScript", "Java"]
     },
     {
@@ -24,8 +24,8 @@
       "url": "https://github.com/juanmariabravo/adivina_la_cancion",
       "demo": "",
       "description": "<p>Juego interactivo para adivinar canciones a través de diversas pistas visuales y auditivas. Ideal para jugar con amigos y poner a prueba tus conocimientos musicales.</p>",
-      "images": ["assets/img/portfolio/adivina_la_cancion.png"],
-      "thumbnail": "assets/img/portfolio/adivina_la_cancion.png",
+      "images": ["assets/img/portfolio/adivina_la_cancion-1.png"],
+      "thumbnail": "assets/img/portfolio/adivina_la_cancion-1.png",
       "technologies": ["Angular", "Python Flask", "SQLite", "Spotify API", "HTML5", "CSS3", "TypeScript"]
     },
     {
@@ -41,20 +41,6 @@
       "images": ["assets/img/portfolio/recomendador-1.png", "assets/img/portfolio/recomendador-2.png", "assets/img/portfolio/recomendador-3.png", "assets/img/portfolio/recomendador-4.png"],
       "thumbnail": "assets/img/portfolio/recomendador-1.png",
       "technologies": ["HTML5", "CSS3", "JavaScript", "JSON"]
-    },
-    {
-      "id": "quiz",
-      "title": "Make It Quiz",
-      "category": "Desarrollo Web",
-      "filter": "filter-web",
-      "purpose": "Proyecto Personal",
-      "date": "2024",
-      "url": "https://github.com/juanmariabravo/make-it-quiz",
-      "demo": "",
-      "description": "<p>Plataforma web completa para la creación, distribución y análisis de cuestionarios personalizados. Permite a los usuarios crear quizzes sobre cualquier tema y compartirlos fácilmente.</p>",
-      "images": ["assets/img/portfolio/make-it-quiz.png"],
-      "thumbnail": "assets/img/portfolio/make-it-quiz.png",
-      "technologies": ["HTML5", "CSS3", "JavaScript", "Node.js", "React", "Tailwind CSS"]
     },
     {
       "id": "remote",
