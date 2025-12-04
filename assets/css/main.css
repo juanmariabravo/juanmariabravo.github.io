@@ -234,6 +234,10 @@ h6 {
   .header~#footer {
     margin-left: 300px;
   }
+.header~main .content-wrapper,
+.header~#footer {
+  margin-right: 50px;
+}
 }
 
 @media (max-width: 1199px) {
