@@ -5,56 +5,204 @@
       "title": "Gramola Spotify",
       "category": "Desarrollo Web",
       "filter": "filter-web",
-      "purpose": "Proyecto Universitario",
+      "purpose": "Proyecto Académico",
       "date": "2025",
       "url": "https://github.com/juanmariabravo/gramola-spotify-2025",
       "demo": "",
       "description": "<p>Aplicación web que integra la API de Spotify para simular una gramola de bar, permitiendo añadir canciones a la reproducción actual de Spotify, seleccionar dispositivos de reproducción, etc.</p><p>Desarrollada con tecnologías web modernas para ofrecer una experiencia de usuario fluida y reactiva.</p>",
-      "images": ["assets/img/portfolio/gramola-esipotify-1.png", "assets/img/portfolio/gramola-esipotify-2.png", "assets/img/portfolio/gramola-esipotify-3.png", "assets/img/portfolio/gramola-esipotify-4.png", "assets/img/portfolio/gramola-esipotify-5.png"],
+      "images": [
+        "assets/img/portfolio/gramola-esipotify-1.png",
+        "assets/img/portfolio/gramola-esipotify-2.png",
+        "assets/img/portfolio/gramola-esipotify-3.png",
+        "assets/img/portfolio/gramola-esipotify-4.png",
+        "assets/img/portfolio/gramola-esipotify-5.png"
+      ],
       "thumbnail": "assets/img/portfolio/gramola-esipotify-1.png",
-      "technologies": ["Angular", "Spring Boot", "MySQL", "Spotify API", "HTML5", "CSS3", "TypeScript", "Java"]
+      "technologies": [
+        "Angular",
+        "Spring Boot",
+        "MySQL",
+        "Spotify API",
+        "HTML5",
+        "CSS3",
+        "TypeScript",
+        "Java"
+      ]
     },
     {
       "id": "adivina",
       "title": "Adivina la Canción",
       "category": "Desarrollo Web",
       "filter": "filter-web",
-      "purpose": "Proyecto Personal",
+      "purpose": "Proyecto Académico",
       "date": "2024",
       "url": "https://github.com/juanmariabravo/adivina_la_cancion",
       "demo": "",
       "description": "<p>Juego interactivo para adivinar canciones a través de diversas pistas visuales y auditivas. Ideal para jugar con amigos y poner a prueba tus conocimientos musicales.</p>",
-      "images": ["assets/img/portfolio/adivina_la_cancion-1.png"],
-      "thumbnail": "assets/img/portfolio/adivina_la_cancion-1.png",
-      "technologies": ["Angular", "Python Flask", "SQLite", "Spotify API", "HTML5", "CSS3", "TypeScript"]
+      "images": [
+        "assets/img/portfolio/adivina-1.png",
+        "assets/img/portfolio/adivina-2.png",
+        "assets/img/portfolio/adivina-3.png",
+        "assets/img/portfolio/adivina-4.png",
+        "assets/img/portfolio/adivina-5.png",
+        "assets/img/portfolio/adivina-6.png"
+      ],
+      "thumbnail": "assets/img/portfolio/adivina-1.png",
+      "technologies": [
+        "Angular",
+        "Python Flask",
+        "SQLite",
+        "Spotify API",
+        "HTML5",
+        "CSS3",
+        "TypeScript"
+      ]
     },
     {
       "id": "recomendador",
       "title": "Recomendador de Viajes con IA",
-      "category": "Chatbot / AI",
-      "filter": "filter-web",
-      "purpose": "Proyecto Universitario",
+      "category": "Inteligencia Artificial",
+      "filter": "filter-ia",
+      "purpose": "Proyecto Académico",
       "date": "2024",
       "url": "https://github.com/juanmariabravo/recomendador-viajes-ia-gsi",
       "demo": "",
       "description": "<p>Integra un chatbot de inteligencia artificial para analizar las preferencias del usuario y recomendar destinos turísticos personalizados.</p>",
-      "images": ["assets/img/portfolio/recomendador-1.png", "assets/img/portfolio/recomendador-2.png", "assets/img/portfolio/recomendador-3.png", "assets/img/portfolio/recomendador-4.png"],
+      "images": [
+        "assets/img/portfolio/recomendador-1.png",
+        "assets/img/portfolio/recomendador-2.png",
+        "assets/img/portfolio/recomendador-3.png",
+        "assets/img/portfolio/recomendador-4.png"
+      ],
       "thumbnail": "assets/img/portfolio/recomendador-1.png",
-      "technologies": ["HTML5", "CSS3", "JavaScript", "JSON"]
+      "technologies": [
+        "HTML5",
+        "CSS3",
+        "JavaScript",
+        "JSON"
+      ]
     },
     {
       "id": "remote",
       "title": "Remote Types SSDD",
       "category": "Sistemas Distribuidos",
-      "filter": "filter-distribuido",
-      "purpose": "Proyecto Universitario",
+      "filter": "filter-sistemas",
+      "purpose": "Proyecto Académico",
       "date": "2024",
       "url": "https://github.com/juanmariabravo/remote-types-ssdd",
       "demo": "",
       "description": "<p>Proyecto académico avanzado sobre sistemas distribuidos. Servicio para el almacenamiento y manipulación de estructuras de datos remotas y persistentes (listas, conjuntos y diccionarios).</p>",
-      "images": ["assets/img/portfolio/remote-types-1.png", "assets/img/portfolio/remote-types-2.png", "assets/img/portfolio/remote-types-3.png"],
+      "images": [
+        "assets/img/portfolio/remote-types-1.png",
+        "assets/img/portfolio/remote-types-2.png",
+        "assets/img/portfolio/remote-types-3.png"
+      ],
       "thumbnail": "assets/img/portfolio/remote-types-1.png",
-      "technologies": ["ZeroC Ice", "Apache Kafka", "Docker", "JSON"]
+      "technologies": [
+        "ZeroC Ice",
+        "Apache Kafka",
+        "Docker",
+        "JSON"
+      ]
+    },
+    {
+      "id": "ipokemon_uwp_2025",
+      "title": "Simulador de Combate Pokémon (UWP)",
+      "category": "Aplicaciones de Escritorio",
+      "filter": "filter-desktop",
+      "purpose": "Proyecto Académico",
+      "date": "2025",
+      "url": "https://github.com/juanmariabravo/IPOkemon_UWP_2025",
+      "demo": "",
+      "description": "<p>Simulador de combate y Pokédex desarrollado para la plataforma <strong>Universal Windows Platform (UWP)</strong>. El proyecto incluye una interfaz de selección de Pokémon y una pantalla de batalla interactiva con animaciones, efectos de sonido y lógica de juego para ataques, defensa y gestión de objetos. Utiliza <strong>C#</strong> para la lógica de programación y <strong>XAML</strong> para el diseño de la interfaz de usuario.</p>",
+      "images": [
+        "assets/img/portfolio/ipokemon-1.png",
+        "assets/img/portfolio/ipokemon-2.png",
+        "assets/img/portfolio/ipokemon-3.png",
+        "assets/img/portfolio/ipokemon-4.png"
+      ],
+      "thumbnail": "assets/img/portfolio/ipokemon-4.png",
+      "technologies": [
+        "C#",
+        "XAML",
+        "Universal Windows Platform (UWP)",
+        ".NET"
+      ]
+    },
+    {
+      "id": "isiChulapaEvents",
+      "title": "isiChulapaEvents - Plataforma de Gestión de Eventos",
+      "category": "Desarrollo Web",
+      "filter": "filter-web",
+      "purpose": "Proyecto Académico",
+      "date": "2024-2025",
+      "url": "https://github.com/carloosnaranjo/isi-ChulapaEvents (Privado)",
+      "demo": "",
+      "description": "<p>isiChulapaEvents es una plataforma de <strong>gestión de eventos</strong> diseñada para visualizar el clima que habrá en Madrid para cada evento. La aplicación utiliza dos APIs principales: la <strong>API de eventos de la Comunidad de Madrid</strong> para obtener información actualizada sobre eventos locales, y la <strong>API de OpenWeather</strong> para mostrar la previsión meteorológica asociada a cada evento. Los usuarios pueden descubrir, filtrar y marcar como favoritos eventos, mientras que los organizadores disponen de herramientas para crear eventos y consultar estadísticas de asistencia.</p>",
+      "images": [
+        "assets/img/portfolio/chulapa-1.png",
+        "assets/img/portfolio/chulapa-3.png",
+        "assets/img/portfolio/chulapa-2.png",
+        "assets/img/portfolio/chulapa-4.png"
+      ],
+      "thumbnail": "assets/img/portfolio/chulapa-1.png",
+      "technologies": [
+        "Next.js 15",
+        "React 18",
+        "TypeScript",
+        "Tailwind CSS",
+        "Better-SQLite3",
+        "Python"
+      ]
+    },
+    {
+      "id": "musicfestmanagerpro",
+      "title": "MusicFest Manager Pro",
+      "category": "Aplicaciones de Escritorio",
+      "filter": "filter-desktop",
+      "purpose": "Proyecto Académico",
+      "date": "2024",
+      "url": "https://github.com/juanmariabravo/MusicFestManagerPro",
+      "demo": "https://github.com/juanmariabravo/MusicFestManagerPro",
+      "description": "<p><strong>MusicFest Manager Pro</strong> es una aplicación de escritorio desarrollada con <strong>WPF</strong> en <strong>C# (.NET Framework)</strong>. Su objetivo es proporcionar una herramienta completa para la administración de un festival de música.</p><p>Las funcionalidades clave incluyen la gestión de:</p><ul><li><strong>Festivales</strong>: Información general, estado (confirmado, aplazado, cancelado), normas, pases y vídeos promocionales.</li><li><strong>Artistas</strong>: Detalles de contacto, biografía, géneros musicales y eventos asignados.</li><li><strong>Escenarios</strong>: Nombre, aforo, ubicación y un mapa interactivo para la visualización.</li><li><strong>Eventos</strong>: Permite establecer la relación entre artistas, festivales, escenarios, fechas y horarios.</li><li><strong>Interfaz de Usuario</strong>: Incluye una interfaz de inicio de sesión, un carrusel de vistas para Festivales, Artistas y Escenarios, y opciones de personalización de la apariencia (modo claro/oscuro).</li></ul>",
+      "images": [
+        "assets/img/portfolio/musicfest-1.png",
+        "assets/img/portfolio/musicfest-2.png",
+        "assets/img/portfolio/musicfest-3.png",
+        "assets/img/portfolio/musicfest-4.png",
+        "assets/img/portfolio/musicfest-5.png"
+      ],
+      "thumbnail": "assets/img/portfolio/musicfest-1.png",
+      "technologies": [
+        "C#",
+        "WPF",
+        ".NET Framework",
+        "XAML",
+        "MVVM (Patrón de diseño)",
+        "Visual Studio"
+      ]
+    },
+    {
+      "id": "project3-databases",
+      "title": "Sistema de Gestión de Bases de Datos de Fórmula 1",
+      "category": "Bases de Datos",
+      "filter": "filter-datos",
+      "purpose": "Proyecto Académico",
+      "date": "2024",
+      "url": "https://github.com/juanmariabravo/Project3_Databases",
+      "demo": "",
+      "description": "<p>Sistema de gestión y evolución de datos para una base de datos de Fórmula 1. Incluye la administración de entidades clave como países, Grandes Premios (GPs), pilotos y equipos. El proyecto se centró en tres casos de uso principales: la gestión de la evolución de datos, la administración de temporadas y la generación de informes (Manage Reports).</p>",
+      "images": [
+        "assets/img/portfolio/project3-databases-1.png",
+        "assets/img/portfolio/project3-databases-2.png",
+        "assets/img/portfolio/project3-databases-3.png",
+        "assets/img/portfolio/project3-databases-4.png"
+      ],
+      "thumbnail": "assets/img/portfolio/project3-databases-1.png",
+      "technologies": [
+        "Visual Basic .NET",
+        "MySQL"
+      ]
     }
   ]
 }
