@@ -742,7 +742,12 @@
           </div>
 
           <div class="col-lg-7">
-            <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+            <form action="https://api.web3forms.com/submit" method="post" class="php-email-form" data-aos="fade-up"
+              data-aos-delay="200">
+              <!-- El Access Key de Web3Forms es público, así que se puede incluir directamente en el HTML -->
+              <input type="hidden" name="access_key" value="0ebb2f43-8cee-4a6a-a42f-050887e22b94">
+              <input type="hidden" name="subject" value="Nuevo mensaje desde Portfolio">
+              <input type="hidden" name="redirect" value="https://juanmariabravo.github.io/#contact">
               <div class="row gy-4">
 
                 <div class="col-md-6">
@@ -757,7 +762,7 @@
 
                 <div class="col-md-12">
                   <label for="subject-field" class="pb-2">Asunto</label>
-                  <input type="text" class="form-control" name="subject" id="subject-field" required="">
+                  <input type="text" class="form-control" name="custom_subject" id="subject-field" required="">
                 </div>
 
                 <div class="col-md-12">
