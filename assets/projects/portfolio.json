@@ -59,6 +59,34 @@
       ]
     },
     {
+      "id": "mp3_mp4_downloader",
+      "title": "Descargador de YouTube - MP3 & MP4",
+      "category": "Desarrollo Web",
+      "filter": "filter-web",
+      "purpose": "Proyecto Personal",
+      "date": "2025",
+      "url": "https://github.com/juanmariabravo/mp3_mp4_downloader",
+      "demo": "",
+      "description": "<p>Descarga y convierte vídeos de YouTube a <strong>MP3</strong> o <strong>MP4</strong> con alta calidad. La aplicación ofrece tres formas de uso: <strong>CLI interactiva</strong> con menú en terminal, <strong>API REST</strong> con FastAPI y <strong>frontend web</strong> con interfaz gráfica en el navegador.</p>",
+      "images": [
+        "assets/img/portfolio/mp3_mp4_downloader-1.png",
+        "assets/img/portfolio/mp3_mp4_downloader-2.png",
+        "assets/img/portfolio/mp3_mp4_downloader-3.png",
+        "assets/img/portfolio/mp3_mp4_downloader-4.png",
+        "assets/img/portfolio/mp3_mp4_downloader-5.png"
+      ],
+      "thumbnail": "assets/img/portfolio/mp3_mp4_downloader-0.png",
+      "technologies": [
+        "Python",
+        "FastAPI",
+        "yt-dlp",
+        "ffmpeg",
+        "HTML5",
+        "CSS3",
+        "JavaScript"
+      ]
+    },
+    {
       "id": "recomendador",
       "title": "Recomendador de Viajes con IA",
       "category": "Inteligencia Artificial",
