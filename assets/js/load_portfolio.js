@@ -26,13 +26,28 @@ document.addEventListener('DOMContentLoaded', function () {
                 portfolioContainer.innerHTML += portfolioItem;
             });
 
+            // Reinicializar AOS para la animación inicial
+            if (typeof AOS !== 'undefined') {
+                AOS.refresh();
+            }
+
             // Reinicializar Isotope después de cargar los proyectos
             if (typeof imagesLoaded !== 'undefined' && typeof Isotope !== 'undefined') {
                 imagesLoaded(portfolioContainer, function () {
                     const isotope = new Isotope(portfolioContainer, {
                         itemSelector: '.portfolio-item',
-                        layoutMode: 'fitRows'
+                        layoutMode: 'fitRows',
+                        transitionDuration: '0.4s'
                     });
+
+                    // Remover atributos AOS después de la animación inicial para evitar conflictos
+                    setTimeout(() => {
+                        document.querySelectorAll('.portfolio-item[data-aos]').forEach(item => {
+                            item.removeAttribute('data-aos');
+                            item.removeAttribute('data-aos-delay');
+                            item.classList.remove('aos-init', 'aos-animate');
+                        });
+                    }, 1500);
 
                     // Filtros
                     const filters = document.querySelectorAll('.portfolio-filters li');
@@ -45,11 +60,6 @@ document.addEventListener('DOMContentLoaded', function () {
                         });
                     });
                 });
-            }
-
-            // Reinicializar AOS
-            if (typeof AOS !== 'undefined') {
-                AOS.refresh();
             }
         })
         .catch(error => console.error('Error cargando proyectos:', error));
