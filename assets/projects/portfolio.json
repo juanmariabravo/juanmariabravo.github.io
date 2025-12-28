@@ -111,6 +111,34 @@
       ]
     },
     {
+      "id": "karaoke_party",
+      "title": "Karaoke Party",
+      "category": "Desarrollo Web",
+      "filter": "filter-web",
+      "purpose": "Proyecto Personal",
+      "date": "2025",
+      "url": "https://github.com/juanmariabravo/karaoke_party",
+      "demo": "",
+      "description": "<p>Aplicación de karaoke inmersiva con gestión dinámica de participantes y canciones desde archivos de configuración JSON. Obtiene canciones de YouTube usando la API de YouTube Data v3.</p>",
+      "images": [
+        "assets/img/portfolio/karaoke_party-1.png",
+        "assets/img/portfolio/karaoke_party-2.png",
+        "assets/img/portfolio/karaoke_party-3.png",
+        "assets/img/portfolio/karaoke_party-4.png",
+        "assets/img/portfolio/karaoke_party-5.png",
+        "assets/img/portfolio/karaoke_party-6.png"
+      ],
+      "thumbnail": "assets/img/portfolio/karaoke_party-1.png",
+      "technologies": [
+        "Python",
+        "HTML5",
+        "CSS3",
+        "JavaScript",
+        "YouTube Data API v3",
+        "JSON"
+      ]
+    },
+    {
       "id": "remote",
       "title": "Remote Types SSDD",
       "category": "Sistemas Distribuidos",
