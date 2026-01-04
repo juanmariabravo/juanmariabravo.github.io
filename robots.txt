@@ -1,0 +1,27 @@
+# robots.txt for Juan María Bravo's Portfolio
+# Google Bot, Bing Bot, and all search engines
+
+User-agent: *
+Allow: /
+Allow: /assets/
+Allow: /index.html
+Allow: /portfolio-details.html
+
+Disallow: /forms/
+Disallow: /assets/vendor/
+
+# Crawl delay to be respectful
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://juanmariabravo.github.io/sitemap.xml
+
+# Specific rules for Google
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Specific rules for Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
