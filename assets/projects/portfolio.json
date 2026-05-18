@@ -1,6 +1,45 @@
 {
   "projects": [
     {
+      "id": "timetrade",
+      "title": "TimeTrade - Intercambio de Favores",
+      "category": "Desarrollo Web",
+      "filter": "filter-web",
+      "purpose": "Proyecto Académico",
+      "date": "2025/26",
+      "url": "https://github.com/LozanoL9/TimeTrade",
+      "demo": "",
+      "description": "<p>Plataforma web colaborativa de intercambio de favores basada en un <strong>banco de tiempo</strong>. La aplicación permite a los usuarios ofrecer y solicitar servicios o habilidades, utilizando créditos que se acumulan y canjean dentro de la plataforma.</p><p>Cuenta con un sistema de gestión de perfiles, publicación de ofertas/solicitudes, mensajería integrada o registro de transacciones para asegurar un intercambio fluido y equitativo entre los miembros de la comunidad.</p>",
+      "images": [
+        "assets/img/portfolio/timetrade-1.png",
+        "assets/img/portfolio/timetrade-2.png",
+        "assets/img/portfolio/timetrade-3.png",
+        "assets/img/portfolio/timetrade-4.png",
+        "assets/img/portfolio/timetrade-5.png",
+        "assets/img/portfolio/timetrade-6.png",
+        "assets/img/portfolio/timetrade-7.png",
+        "assets/img/portfolio/timetrade-8.png",
+        "assets/img/portfolio/timetrade-9.png",
+        "assets/img/portfolio/timetrade-10.png",
+        "assets/img/portfolio/timetrade-11.png",
+        "assets/img/portfolio/timetrade-12.png",
+        "assets/img/portfolio/timetrade-13.png"
+      ],
+      "thumbnail": "assets/img/portfolio/timetrade-1.png",
+      "technologies": [
+        "Angular",
+        "Python",
+        "FastAPI",
+        "PostgreSQL",
+        "Stripe",
+        "WebSockets",
+        "HTML5",
+        "CSS3",
+        "JavaScript",
+        "TypeScript"
+      ]
+    },
+    {
       "id": "gramola",
       "title": "Gramola Spotify",
       "category": "Desarrollo Web",
