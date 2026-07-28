@@ -1,6 +1,40 @@
 {
   "projects": [
     {
+      "id": "tfg-social-connect",
+      "title": "Social Connect - Trabajo de Fin de Grado (TFG)",
+      "category": "Desarrollo Web",
+      "filter": "filter-web",
+      "purpose": "Trabajo de Fin de Grado",
+      "date": "2026",
+      "url": "https://github.com/juanmariabravo/tfg-social-connect-frontend",
+      "demo": "",
+      "description": "<p><strong>Social Connect</strong> es mi Trabajo de Fin de Grado: una plataforma web de conexión social basada en intereses compartidos y personalidad, con funcionalidades de interacción social y comunicación en tiempo real.</p><p>El TFG fue evaluado con una calificación de <strong>9.5/10</strong>.</p><p>El proyecto está organizado en tres repositorios: <a href='https://github.com/juanmariabravo/tfg-social-connect-frontend' target='_blank' rel='noopener'>Frontend</a>, <a href='https://github.com/juanmariabravo/tfg-social-connect-backend' target='_blank' rel='noopener'>Backend</a> y <a href='https://github.com/juanmariabravo/tfg-social-connect-documentation' target='_blank' rel='noopener'>Documentación técnica</a>.</p>",
+      "images": [
+        "assets/img/portfolio/social connect/1.png",
+        "assets/img/portfolio/social connect/3.png",
+        "assets/img/portfolio/social connect/23.png",
+        "assets/img/portfolio/social connect/24.png",
+        "assets/img/portfolio/social connect/25.png",
+        "assets/img/portfolio/social connect/251.png",
+        "assets/img/portfolio/social connect/26.png",
+        "assets/img/portfolio/social connect/29.png"
+      ],
+      "thumbnail": "assets/img/portfolio/social connect/1.png",
+      "technologies": [
+        "React",
+        "MongoDB",
+        "Node.js",
+        "Express.js",
+        "JS y TypeScript",
+        "Vite",
+        "Tailwind CSS",
+        "Shadcn UI",
+        "Socket.IO",
+        "API REST"
+      ]
+    },
+    {
       "id": "timetrade",
       "title": "TimeTrade - Intercambio de Favores",
       "category": "Desarrollo Web",
