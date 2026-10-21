@@ -1,3 +1,12 @@
+function normalizeProjectFilters(project) {
+    const rawFilters = Array.isArray(project.filter) ? project.filter : String(project.filter || '').split(',');
+
+    return rawFilters
+        .flatMap(filter => String(filter || '').split(/\s+/))
+        .map(filter => filter.trim().replace(/^\./, ''))
+        .filter(Boolean);
+}
+
 // Cargar proyectos desde JSON
 document.addEventListener('DOMContentLoaded', function () {
     fetch('assets/projects/portfolio.json')
@@ -12,8 +21,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
             data.projects.forEach((project, index) => {
                 const delay = (index + 1) * 100;
+                const projectFilters = normalizeProjectFilters(project).join(' ');
                 const portfolioItem = `
-          <div class="col-lg-4 col-md-6 portfolio-item isotope-item ${project.filter}" data-aos="fade-up" data-aos-delay="${delay}">
+          <div class="col-lg-4 col-md-6 portfolio-item isotope-item ${projectFilters}" data-aos="fade-up" data-aos-delay="${delay}">
             <div class="portfolio-content h-100">
               <img src="${project.thumbnail}" class="img-fluid" alt="${project.title}">
               <div class="portfolio-info">
