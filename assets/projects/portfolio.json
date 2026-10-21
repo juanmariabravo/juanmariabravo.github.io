@@ -35,6 +35,37 @@
       ]
     },
     {
+      "id": "atril-cancionero",
+      "title": "Atril - Cancionero web con acordes",
+      "category": "Desarrollo Web",
+      "filter": "filter-web",
+      "purpose": "Proyecto personal",
+      "date": "2026",
+      "demo": "https://atril.juanmaria-bravo.workers.dev/",
+      "description": "<p><strong>Atril</strong> es un cancionero web con acordes: una biblioteca de canciones almacenadas en el estándar <strong>ChordPro</strong>, pensada como atril digital para músicos.</p><p>Permite buscar por título, artista o etiquetas, transponer la tonalidad, alternar entre cifrado americano y latino, ajustar el tamaño de fuente y ocultar los acordes para leer solo la letra.</p><p>Incluye favoritos sin necesidad de cuenta, creación de misas a partir de plantillas litúrgicas y un <strong>cancionero personalizable</strong> con exportación a <strong>PDF</strong> (maquetación a una o dos columnas e índice por páginas reales) y <strong>DOCX</strong>, además de la importación de canciones desde fotos del cancionero en papel mediante IA.</p><p>Arquitectura en tres capas: base de datos en <strong>Supabase</strong> (PostgreSQL con RLS), API en <strong>Python/FastAPI</strong> y frontend en <strong>React 19 + TanStack Start</strong>, desplegado en Cloudflare Workers.</p>",
+      "images": [
+        "assets/img/portfolio/atril/1.png",
+        "assets/img/portfolio/atril/2.png",
+        "assets/img/portfolio/atril/3.png",
+        "assets/img/portfolio/atril/4.png",
+        "assets/img/portfolio/atril/5.png",
+        "assets/img/portfolio/atril/6.png"
+      ],
+      "thumbnail": "assets/img/portfolio/atril/1.png",
+      "technologies": [
+        "React 19",
+        "Vite",
+        "Python",
+        "FastAPI",
+        "Supabase",
+        "PostgreSQL",
+        "Cloudflare Workers",
+        "IA (OpenRouter and Ollama)",
+        "jsPDF",
+        "DOCX"
+      ]
+    },
+    {
       "id": "timetrade",
       "title": "TimeTrade - Intercambio de Favores",
       "category": "Desarrollo Web",

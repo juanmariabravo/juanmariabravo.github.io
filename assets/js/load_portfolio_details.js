@@ -38,7 +38,8 @@ document.addEventListener('DOMContentLoaded', function () {
                         <li><strong>Propósito</strong>: ${project.purpose}</li>
                         <li><strong>Fecha</strong>: ${project.date}</li>
                         <li><strong>Tecnologías</strong>: ${project.technologies.join(', ')}</li>
-                        <li><strong>URL del Proyecto</strong>: <a href="${project.url}" target="_blank" rel="noopener">${project.url}</a></li>
+                        ${project.url ? `<li><strong>URL del Proyecto</strong>: <a href="${project.url}" target="_blank" rel="noopener">${project.url}</a></li>` : ''}
+                        ${project.demo ? `<li><strong>Página en producción</strong>: <a href="${project.demo}" target="_blank" rel="noopener">${project.demo}</a></li>` : ''}
                     `;
                 }
 
