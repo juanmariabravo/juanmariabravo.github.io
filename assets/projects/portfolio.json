@@ -35,6 +35,37 @@
       ]
     },
     {
+      "id": "make-it-quiz",
+      "title": "Make It Quiz - Crea tus propios tests",
+      "category": "Desarrollo Web",
+      "filter": "filter-web, filter-communication",
+      "purpose": "Proyecto personal",
+      "date": "2026",
+      "demo": "https://make-it-quiz.netlify.app/",
+      "description": "<p><strong>Make It Quiz</strong> es una aplicación web educativa para crear, gestionar y realizar cuestionarios interactivos de forma sencilla.</p><p>La plataforma permite estudiar mediante preguntas personalizadas, realizar exámenes con puntuación y tiempo límite, y practicar en un modo CLI con una experiencia similar a un terminal.</p><p>También incluye un gestor de tests que permite crear, importar, editar, eliminar y descargar cuestionarios, almacenándolos localmente en el navegador.</p><p>Make It Quiz ofrece una interfaz moderna, responsive y compatible con modo claro y oscuro, diseñada para facilitar el aprendizaje y la autoevaluación.</p>",
+      "images": [
+        "assets/img/portfolio/make-it-quiz/1.png",
+        "assets/img/portfolio/make-it-quiz/9.png",
+        "assets/img/portfolio/make-it-quiz/2.png",
+        "assets/img/portfolio/make-it-quiz/3.png",
+        "assets/img/portfolio/make-it-quiz/4.png",
+        "assets/img/portfolio/make-it-quiz/5.png",
+        "assets/img/portfolio/make-it-quiz/6.png",
+        "assets/img/portfolio/make-it-quiz/7.png",
+        "assets/img/portfolio/make-it-quiz/8.png"
+      ],
+      "thumbnail": "assets/img/portfolio/make-it-quiz/1.png",
+      "technologies": [
+        "Next.js 16.4.6",
+        "React 19y React DOM 19",
+        "TypeScript 5",
+        "Tailwind CSS 3",
+        "Python",
+        "pnpm",
+        "Netlify"
+      ]
+    },
+    {
       "id": "atril-cancionero",
       "title": "Atril - Cancionero web con acordes",
       "category": "Desarrollo Web",
