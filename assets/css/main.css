@@ -65,12 +65,6 @@ body {
   background-color: var(--background-color);
   font-family: var(--default-font);
   overflow-x: hidden; /* Ocultar scrollbar en todos los navegadores */
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
-}
-
-body::-webkit-scrollbar {
-  display: none; /* Chrome, Safari y Opera */
 }
 
 .header {
@@ -95,14 +89,6 @@ body::-webkit-scrollbar {
   display: none; /* Chrome, Safari y Opera */
 }
 
-html {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-html::-webkit-scrollbar {
-  display: none;
-}
 a {
   color: var(--accent-color);
   text-decoration: none;

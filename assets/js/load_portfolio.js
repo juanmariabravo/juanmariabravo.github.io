@@ -7,10 +7,25 @@ function normalizeProjectFilters(project) {
         .filter(Boolean);
 }
 
+function escapeHtml(value) {
+    return String(value ?? '').replace(/[&<>"']/g, character => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+    }[character]));
+}
+
 // Cargar proyectos desde JSON
 document.addEventListener('DOMContentLoaded', function () {
     fetch('assets/projects/portfolio.json')
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`No se pudo cargar portfolio.json (${response.status})`);
+            }
+            return response.json();
+        })
         .then(data => {
             const portfolioContainer = document.querySelector('.isotope-layout .row.gy-4.isotope-container');
 
@@ -25,11 +40,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 const portfolioItem = `
           <div class="col-lg-4 col-md-6 portfolio-item isotope-item ${projectFilters}" data-aos="fade-up" data-aos-delay="${delay}">
             <div class="portfolio-content h-100">
-              <img src="${project.thumbnail}" class="img-fluid" alt="${project.title}">
+              <img src="${escapeHtml(project.thumbnail)}" class="img-fluid" alt="${escapeHtml(project.title)}" loading="lazy" decoding="async">
               <div class="portfolio-info">
-                <h4>${project.title}</h4>
-                <p>${project.technologies}</p>
-                <a href="portfolio-details.html?id=${project.id}" title="Más Detalles" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                <h4>${escapeHtml(project.title)}</h4>
+                <p>${escapeHtml(project.technologies.join(', '))}</p>
+                <a href="portfolio-details.html?id=${encodeURIComponent(project.id)}" title="Más Detalles" class="details-link" aria-label="Ver detalles de ${escapeHtml(project.title)}"><i class="bi bi-link-45deg"></i></a>
             </div>
           </div>
         `;
@@ -67,6 +82,12 @@ document.addEventListener('DOMContentLoaded', function () {
                             this.classList.add('filter-active');
                             const filterValue = this.getAttribute('data-filter');
                             isotope.arrange({ filter: filterValue });
+                        });
+                        filter.addEventListener('keydown', function (event) {
+                            if (event.key === 'Enter' || event.key === ' ') {
+                                event.preventDefault();
+                                this.click();
+                            }
                         });
                     });
                 });

@@ -3,7 +3,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const projectId = params.get('id');
 
     fetch('assets/projects/portfolio.json')
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`No se pudo cargar portfolio.json (${response.status})`);
+            }
+            return response.json();
+        })
         .then(data => {
             const project = data.projects.find(p => p.id === projectId);
 
@@ -21,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 project.images.forEach(imgSrc => {
                     const slide = document.createElement('div');
                     slide.className = 'swiper-slide';
-                    slide.innerHTML = `<img src="${imgSrc}" alt="${project.title}">`;
+                    slide.innerHTML = `<img src="${imgSrc}" alt="${project.title}" loading="lazy" decoding="async">`;
                     swiperWrapper.appendChild(slide);
                 });
 
@@ -40,6 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         <li><strong>Tecnologías</strong>: ${project.technologies.join(', ')}</li>
                         ${project.url ? `<li><strong>URL del Proyecto</strong>: <a href="${project.url}" target="_blank" rel="noopener">${project.url}</a></li>` : ''}
                         ${project.demo ? `<li><strong>Página en producción</strong>: <a href="${project.demo}" target="_blank" rel="noopener">${project.demo}</a></li>` : ''}
+                        ${project.private ? '<li><strong>Acceso</strong>: Repositorio privado</li>' : ''}
                     `;
                 }
 

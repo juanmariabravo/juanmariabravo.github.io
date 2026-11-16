@@ -8,12 +8,13 @@ Este repositorio contiene el código fuente de mi portfolio personal, creado a p
 #### 📃 [Accede a mi CV en formato PDF](https://juanmariabravo.github.io/assets/cvs/JuanMariaBravo_CV.pdf)
 
 ### 📌 Sobre mí
-Soy estudiante de último curso del **Grado en Ingeniería Informática** en la Universidad de Castilla-La Mancha.  
-Apasionado por la programación competitiva, el desarrollo de software y la resolución de problemas algorítmicos.  
+Soy graduado en **Ingeniería Informática** y estudiante del **Máster Universitario en Ingeniería Informática (MUii)** en la Universidad de Castilla-La Mancha.
+
+Apasionado por la programación competitiva, el desarrollo de software, la ciberseguridad y la resolución de problemas algorítmicos.
 
 
 ---
-✉️ Contacto: juanmaria.bravo@alu.uclm.com  
+✉️ Contacto: JuanMaria.Bravo@alu.uclm.es
 🔗 GitHub: [@juanmariabravo](https://github.com/juanmariabravo)  
 
 ### Información de la plantilla utilizada
