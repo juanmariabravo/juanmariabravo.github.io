@@ -327,7 +327,8 @@
       "filter": "filter-web, filter-api",
       "purpose": "Proyecto Académico",
       "date": "2024",
-      "url": "https://github.com/carloosnaranjo/isi-ChulapaEvents (Privado)",
+      "url": "https://github.com/carloosnaranjo/isi-ChulapaEvents",
+      "private": true,
       "demo": "",
       "description": "<p>isiChulapaEvents es una plataforma de <strong>gestión de eventos</strong> diseñada para visualizar el clima que habrá en Madrid para cada evento. La aplicación utiliza dos APIs principales: la <strong>API de eventos de la Comunidad de Madrid</strong> para obtener información actualizada sobre eventos locales, y la <strong>API de OpenWeather</strong> para mostrar la previsión meteorológica asociada a cada evento. Los usuarios pueden descubrir, filtrar y marcar como favoritos eventos, mientras que los organizadores disponen de herramientas para crear eventos y consultar estadísticas de asistencia.</p>",
       "images": [
