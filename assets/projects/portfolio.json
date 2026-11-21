@@ -1,6 +1,38 @@
 {
   "projects": [
     {
+      "id": "arduino-projects",
+      "title": "Arduino Projects - Laboratorio de Electrónica",
+      "category": "Sistemas Embebidos",
+      "filter": "filter-electronica",
+      "purpose": "Proyecto Personal",
+      "date": "2026",
+      "url": "https://github.com/juanmariabravo/Arduino-Projects",
+      "demo": "",
+      "description": "<p><strong>Arduino Projects</strong> es un laboratorio personal de electrónica, programación y automatización basado en Arduino UNO. El repositorio reúne proyectos prácticos clasificados por fundamentos, sensores, lógica y control, domótica, interacción física, seguridad e instrumentación.</p><p>Entre sus prácticas destacan el <strong>medidor de resistencias</strong>, la <strong>estación meteorológica</strong>, el control automático de cerraduras y persianas, semáforos, alarmas, termostatos, medidores ópticos y la integración progresiva de LEDs, motores, relés y matrices LED.</p><p>Los proyectos incluyen esquemas de conexión, código en C y C++, documentación paso a paso y demostraciones de montaje, con el objetivo de aprender desde los conceptos básicos hasta sistemas embebidos funcionales.</p>",
+      "images": [
+        "assets/img/portfolio/arduino-projects/1.png",
+        "assets/img/portfolio/arduino-projects/2.jpeg",
+        "assets/img/portfolio/arduino-projects/3.png",
+        "assets/img/portfolio/arduino-projects/4.png"
+      ],
+      "thumbnail": "assets/img/portfolio/arduino-projects/1.png",
+      "technologies": [
+        "Arduino UNO",
+        "C",
+        "C++",
+        "Arduino IDE",
+        "Sensores",
+        "Actuadores",
+        "LCD",
+        "RTC",
+        "Relés",
+        "Motores",
+        "Servomotores",
+        "RFID"
+      ]
+    },
+    {
       "id": "tfg-social-connect",
       "title": "Social Connect - Trabajo de Fin de Grado (TFG)",
       "category": "Desarrollo Web",
