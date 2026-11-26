@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Redirigiendo…</title>
+  <!-- Compatibilidad con los enlaces de la v1: portfolio-details.html?id=X → /proyectos/X/ -->
+  <script>
+    (function () {
+      var id = new URLSearchParams(location.search).get('id');
+      var target = id && /^[\w-]+$/.test(id) ? '/proyectos/' + id + '/' : '/#proyectos';
+      location.replace(target);
+    })();
+  </script>
+  <noscript><meta http-equiv="refresh" content="0; url=/#proyectos"></noscript>
+</head>
+<body>
+  <p><a href="/#proyectos">Ver proyectos</a></p>
+</body>
+</html>

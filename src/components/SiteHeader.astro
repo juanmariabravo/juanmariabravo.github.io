@@ -1,0 +1,178 @@
+---
+import Menu from '@lucide/astro/icons/menu';
+import X from '@lucide/astro/icons/x';
+import Download from '@lucide/astro/icons/download';
+import ThemeToggle from './ThemeToggle.astro';
+import BrandIcon from './BrandIcon.astro';
+import { profile } from '../data/profile';
+
+const links = [
+  { href: '/#proyectos', label: 'Proyectos' },
+  { href: '/#experiencia', label: 'Experiencia' },
+  { href: '/#formacion', label: 'Formación' },
+  { href: '/#contacto', label: 'Contacto' },
+];
+---
+
+<header class="site-header sticky top-0 z-40">
+  <div class="container-page flex h-16 items-center justify-between gap-3">
+    <a href="/" class="flex min-h-11 min-w-11 items-center gap-2.5 font-semibold tracking-tight">
+      <img src="/favicon.svg" alt="" width="36" height="36" class="size-9 rounded-[0.6rem]" aria-hidden="true" />
+      <span class="sr-only sm:not-sr-only">{profile.shortName}</span>
+    </a>
+
+    <nav aria-label="Principal" class="hidden md:block">
+      <ul class="flex items-center gap-1">
+        {
+          links.map((l) => (
+            <li>
+              <a href={l.href} class="nav-link">
+                {l.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <ThemeToggle />
+      <a href={profile.cv} class="btn btn-primary hidden min-h-10! px-4! text-sm sm:inline-flex" target="_blank" rel="noopener">
+        <Download size={16} aria-hidden="true" /> CV
+      </a>
+      <button type="button" class="icon-btn md:hidden" data-menu-open aria-label="Abrir menú" aria-haspopup="dialog">
+        <Menu size={20} aria-hidden="true" />
+      </button>
+    </div>
+  </div>
+
+  <!-- Menú móvil -->
+  <dialog class="mobile-menu" data-menu aria-label="Menú">
+    <div class="flex h-16 items-center justify-between px-4">
+      <span class="font-semibold">{profile.shortName}</span>
+      <button type="button" class="icon-btn" data-menu-close aria-label="Cerrar menú">
+        <X size={20} aria-hidden="true" />
+      </button>
+    </div>
+    <nav aria-label="Menú móvil" class="px-4 pb-6">
+      <ul class="grid gap-1">
+        {
+          links.map((l) => (
+            <li>
+              <a href={l.href} class="mobile-link" data-menu-link>
+                {l.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <a href={profile.cv} class="btn btn-primary mt-6 w-full" target="_blank" rel="noopener">
+        <Download size={18} aria-hidden="true" /> Descargar CV
+      </a>
+      <ul class="mt-6 flex justify-center gap-2" aria-label="Redes sociales">
+        {
+          profile.socials.map((s) => (
+            <li>
+              <a href={s.url} class="icon-btn social-brand" data-network={s.icon} target="_blank" rel="noopener" aria-label={s.name}>
+                <BrandIcon name={s.icon} size={18} />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </dialog>
+</header>
+
+<style>
+  .site-header {
+    background: color-mix(in srgb, var(--bg), transparent 15%);
+    backdrop-filter: saturate(180%) blur(14px);
+    -webkit-backdrop-filter: saturate(180%) blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.5rem;
+    padding: 0 0.85rem;
+    border-radius: 999px;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--muted);
+    transition: color 0.2s ease, background-color 0.2s ease;
+  }
+
+  .nav-link:hover {
+    color: var(--text);
+    background: var(--surface-2);
+  }
+
+  .mobile-menu {
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+    height: 100dvh;
+    max-height: 100dvh;
+    padding: 0;
+    border: 0;
+    background: var(--bg);
+    color: var(--text);
+  }
+
+  .mobile-menu::backdrop {
+    background: rgb(0 0 0 / 0.4);
+  }
+
+  .mobile-menu[open] {
+    animation: menu-in 0.22s ease-out;
+  }
+
+  @keyframes menu-in {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+  }
+
+  .mobile-link {
+    display: flex;
+    align-items: center;
+    min-height: 3.25rem;
+    padding: 0 0.75rem;
+    font-size: 1.375rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    border-radius: 0.75rem;
+  }
+
+  .mobile-link:hover {
+    background: var(--surface-2);
+  }
+</style>
+
+<script>
+  const menu = document.querySelector<HTMLDialogElement>('[data-menu]');
+  const openBtn = document.querySelector<HTMLButtonElement>('[data-menu-open]');
+
+  if (menu && openBtn) {
+    openBtn.addEventListener('click', () => menu.showModal());
+    menu.querySelector('[data-menu-close]')?.addEventListener('click', () => menu.close());
+    // Al elegir un enlace se cierra el menú y el navegador hace el scroll al ancla.
+    // En ese caso no se devuelve el foco al botón, porque interrumpiría el scroll.
+    let navigating = false;
+    menu.querySelectorAll('[data-menu-link]').forEach((a) =>
+      a.addEventListener('click', () => {
+        navigating = true;
+        menu.close();
+      }),
+    );
+    // Si se pasa a escritorio con el menú abierto, se cierra
+    matchMedia('(min-width: 768px)').addEventListener('change', (e) => e.matches && menu.close());
+    menu.addEventListener('close', () => {
+      if (!navigating) openBtn.focus({ preventScroll: true });
+      navigating = false;
+    });
+  }
+</script>

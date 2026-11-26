@@ -1,0 +1,45 @@
+---
+import Sun from '@lucide/astro/icons/sun';
+import Moon from '@lucide/astro/icons/moon';
+---
+
+<button type="button" class="icon-btn theme-toggle" data-theme-toggle aria-label="Cambiar a tema claro">
+  <Sun size={18} class="icon-sun" aria-hidden="true" />
+  <Moon size={18} class="icon-moon" aria-hidden="true" />
+</button>
+
+<style>
+  .theme-toggle .icon-sun {
+    display: none;
+  }
+  :global([data-theme='dark']) .theme-toggle .icon-sun {
+    display: block;
+  }
+  :global([data-theme='dark']) .theme-toggle .icon-moon {
+    display: none;
+  }
+</style>
+
+<script>
+  function syncLabel() {
+    const dark = document.documentElement.dataset.theme === 'dark';
+    document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]').forEach((btn) => {
+      btn.setAttribute('aria-label', dark ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro');
+    });
+  }
+
+  document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+      document.documentElement.dataset.theme = next;
+      try {
+        localStorage.setItem('theme', next);
+      } catch {
+        /* almacenamiento no disponible: el tema solo dura esta visita */
+      }
+      syncLabel();
+    });
+  });
+
+  syncLabel();
+</script>

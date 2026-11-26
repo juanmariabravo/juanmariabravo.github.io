@@ -1,0 +1,533 @@
+---
+import { Picture } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import BrandIcon from '../components/BrandIcon.astro';
+import ProjectGrid from '../components/ProjectGrid.astro';
+import ContactForm from '../components/ContactForm.astro';
+import Download from '@lucide/astro/icons/download';
+import Mail from '@lucide/astro/icons/mail';
+import MapPin from '@lucide/astro/icons/map-pin';
+import Briefcase from '@lucide/astro/icons/briefcase';
+import GraduationCap from '@lucide/astro/icons/graduation-cap';
+import Languages from '@lucide/astro/icons/languages';
+import Trophy from '@lucide/astro/icons/trophy';
+import Code from '@lucide/astro/icons/code';
+import ArrowUpRight from '@lucide/astro/icons/arrow-up-right';
+import ArrowRight from '@lucide/astro/icons/arrow-right';
+import Sparkles from '@lucide/astro/icons/sparkles';
+import profilePhoto from '../assets/img/profile.jpg';
+import { Image } from 'astro:assets';
+import m2mLogoLight from '../assets/img/m2m/logo-light.png';
+import m2mLogoDark from '../assets/img/m2m/logo-dark.png';
+import m2mIsotipo from '../assets/img/m2m/isotipo.png';
+import { profile, stack, experience, education, achievements, awards } from '../data/profile';
+import { getProjects, resolveImage } from '../lib/projects';
+
+const projects = await getProjects();
+const featured = projects.filter((p) => p.featured);
+const [mainFeatured, ...otherFeatured] = featured;
+const mainFeaturedImage = mainFeatured ? await resolveImage(mainFeatured.thumbnail) : null;
+const otherFeaturedImages = await Promise.all(otherFeatured.map((p) => resolveImage(p.thumbnail)));
+
+const description =
+  'Portfolio de Juan María Bravo López, Ingeniero Informático por la UCLM y desarrollador de software fullstack en M2M Aplicaciones. Proyectos web, experiencia y contacto.';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: profile.name,
+  jobTitle: profile.role,
+  url: profile.siteUrl,
+  email: profile.email,
+  address: { '@type': 'PostalAddress', addressLocality: 'Toledo', addressCountry: 'ES' },
+  worksFor: { '@type': 'Organization', name: profile.current.company, url: profile.current.url },
+  alumniOf: { '@type': 'CollegeOrUniversity', name: 'Universidad de Castilla-La Mancha', url: 'https://www.uclm.es/' },
+  sameAs: profile.socials.map((s) => s.url),
+};
+---
+
+<Base title={`${profile.name} · ${profile.role}`} description={description} jsonLd={jsonLd}>
+  <!-- ===================== BENTO ===================== -->
+  <section class="container-page pt-6 sm:pt-10" aria-label="Presentación">
+    <div class="bento grid gap-3 sm:gap-4 md:grid-cols-2 lg:grid-cols-4 lg:grid-flow-dense">
+      <!-- Presentación -->
+      <div class="tile reveal flex flex-col justify-between gap-8 md:col-span-2 lg:row-span-2">
+        <div>
+          <div class="mb-6 flex items-center gap-3 md:hidden">
+            <!-- 56px en pantalla: versiones 1x, 2x y 3x para móviles de alta densidad -->
+            <Picture
+              src={profilePhoto}
+              formats={['avif']}
+              fallbackFormat="webp"
+              width={56}
+              densities={[1, 2, 3]}
+              quality={85}
+              alt=""
+              class="size-14 rounded-full object-cover"
+              loading="eager"
+            />
+            <span class="inline-flex items-center gap-2 rounded-full bg-success-soft px-3 py-1 text-xs font-semibold text-success">
+              <span class="pulse size-2 rounded-full bg-current" aria-hidden="true"></span> Trabajando en {profile.current.company}
+            </span>
+          </div>
+          <span class="hidden items-center gap-2 rounded-full bg-success-soft px-3 py-1 text-xs font-semibold text-success md:inline-flex">
+            <span class="pulse size-2 rounded-full bg-current" aria-hidden="true"></span> Trabajando en {profile.current.company}
+          </span>
+          <h1 class="mt-4 text-[2.5rem] leading-[1.02] font-bold tracking-[-0.04em] sm:text-6xl">
+            {profile.name}
+          </h1>
+          <p class="mt-3 text-lg font-medium text-accent-text sm:text-xl">{profile.role}</p>
+          <p class="mt-4 max-w-xl text-base leading-relaxed text-muted sm:text-lg">{profile.headline}</p>
+        </div>
+        <div class="flex flex-col gap-2.5 sm:flex-row">
+          <a href={profile.cv} class="btn btn-primary" target="_blank" rel="noopener">
+            <Download size={18} aria-hidden="true" /> Descargar CV
+          </a>
+          <a href="#contacto" class="btn btn-ghost">
+            <Mail size={18} aria-hidden="true" /> Contactar
+          </a>
+        </div>
+      </div>
+
+      <!-- Foto -->
+      <div class="tile reveal hidden p-0! md:block md:row-span-2" style="--reveal-delay:60ms">
+        <Picture
+          src={profilePhoto}
+          formats={['avif']}
+          fallbackFormat="webp"
+          quality={85}
+          widths={[480, 720, 960, 1280, 1632]}
+          sizes="(min-width: 1536px) 520px, (min-width: 1024px) 480px, 50vw"
+          alt={`Fotografía de ${profile.name}`}
+          class="size-full min-h-64 object-cover object-top"
+          loading="eager"
+        />
+      </div>
+
+      <!-- Trabajo actual -->
+      <a
+        href={profile.current.url}
+        target="_blank"
+        rel="noopener"
+        class="tile tile-link now-tile reveal flex flex-col justify-between gap-5"
+        style={`--reveal-delay:100ms; --isotipo:url(${m2mIsotipo.src})`}
+        aria-label={`Ahora: ${profile.current.role} en ${profile.current.company} desde ${profile.current.since}`}
+      >
+        <span class="now-mark" aria-hidden="true"></span>
+        <span class="tile-label relative"><Briefcase size={14} aria-hidden="true" /> Ahora · desde {profile.current.since}</span>
+        <div class="relative">
+          <Image src={m2mLogoLight} alt={profile.current.company} width={217} class="logo-light h-auto w-44 max-w-full" />
+          <Image src={m2mLogoDark} alt={profile.current.company} width={217} class="logo-dark h-auto w-44 max-w-full" />
+        </div>
+        <div class="relative">
+          <p class="font-semibold tracking-tight">Desarrollador Fullstack</p>
+          <p class="mt-0.5 text-sm text-muted">{profile.current.department}</p>
+        </div>
+        <ArrowUpRight size={18} class="absolute top-5 right-5 text-muted" aria-hidden="true" />
+      </a>
+
+      <!-- Datos rápidos -->
+      <div class="tile reveal flex flex-col justify-center gap-3 text-sm" style="--reveal-delay:140ms">
+        <p class="flex items-center gap-2.5"><MapPin size={17} class="shrink-0 text-accent-text" aria-hidden="true" /> {profile.location}</p>
+        <p class="flex items-center gap-2.5"><GraduationCap size={17} class="shrink-0 text-accent-text" aria-hidden="true" />
+          <span>
+            <a
+              href="https://www.uclm.es/estudios/masteres/master-ingenieria-informatica%202024"
+              target="_blank"
+              rel="noopener"
+              class="link-underline"
+              title="Máster Universitario en Ingeniería Informática (UCLM)">MUii (UCLM)</a> · En curso
+          </span>
+        </p>
+        <p class="flex items-center gap-2.5"><Languages size={17} class="shrink-0 text-accent-text" aria-hidden="true" /> {profile.english}</p>
+      </div>
+
+      <!-- Proyecto destacado principal -->
+      {
+        mainFeatured && mainFeaturedImage && (
+          <article class="tile tile-link featured reveal flex flex-col gap-5 pb-0! md:col-span-2 lg:row-span-2">
+            <div>
+              <span class="tile-label">
+                <Sparkles size={14} aria-hidden="true" /> Proyecto destacado
+              </span>
+              <h2 class="mt-2 text-2xl leading-tight font-bold tracking-tight">
+                <a href={`/proyectos/${mainFeatured.id}/`} class="featured-link after:absolute after:inset-0 after:content-['']">
+                  {mainFeatured.title}
+                </a>
+              </h2>
+              <ul class="mt-3 flex flex-wrap gap-1.5" aria-label="Tecnologías">
+                {mainFeatured.technologies.slice(0, 5).map((t) => (
+                  <li class="chip text-xs!">{t}</li>
+                ))}
+              </ul>
+            </div>
+            <div class="featured-frame relative mt-auto min-h-52 flex-1">
+              <Picture
+                src={mainFeaturedImage}
+                formats={['avif']}
+                fallbackFormat="webp"
+                widths={[640, 960, 1280, 1600, 1920]}
+                sizes="(min-width: 1024px) 840px, (min-width: 768px) 720px, 100vw"
+                alt=""
+                class="featured-img absolute inset-0 size-full object-cover object-left-top"
+              />
+            </div>
+          </article>
+        )
+      }
+
+      <!-- Stack -->
+      <div class="tile reveal md:col-span-2" style="--reveal-delay:60ms">
+        <span class="tile-label"><Code size={14} aria-hidden="true" /> Stack</span>
+        <dl class="mt-4 grid gap-3">
+          {
+            stack.map((g) => (
+              <div class="grid gap-1.5 sm:grid-cols-[7.75rem_1fr] sm:items-baseline" data-tone={g.tone}>
+                <dt class="flex items-center gap-2 text-sm font-medium text-muted">
+                  <span class="tone-dot" aria-hidden="true" />
+                  {g.group}
+                </dt>
+                <dd class="flex flex-wrap gap-1.5">
+                  {g.items.map((i) => (
+                    <span class="chip chip-tone">{i}</span>
+                  ))}
+                </dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+
+      <!-- Otros destacados -->
+      {
+        otherFeatured.map((p, i) => (
+          <article class="tile tile-link reveal flex flex-col gap-3 p-0!" style={`--reveal-delay:${100 + i * 40}ms`}>
+            <div class="aspect-[16/9] overflow-hidden border-b border-line bg-surface-2">
+              <Picture
+                src={otherFeaturedImages[i]!}
+                formats={['avif']} fallbackFormat="webp"
+                widths={[400, 640, 960, 1280]}
+                sizes="(min-width: 1024px) 290px, (min-width: 768px) 50vw, 100vw"
+                alt=""
+                class="size-full object-cover object-top"
+              />
+            </div>
+            <div class="px-5 pb-5">
+              <p class="tile-label">{p.demo ? 'Web Pública' : p.category}</p>
+              <h2 class="mt-1 leading-snug font-semibold tracking-tight">
+                <a href={`/proyectos/${p.id}/`} class="after:absolute after:inset-0 after:content-['']">
+                  {p.title}
+                </a>
+              </h2>
+            </div>
+          </article>
+        ))
+      }
+
+      <!-- Premios -->
+      <div class="tile reveal md:col-span-2" style="--reveal-delay:60ms">
+        <span class="tile-label"><Trophy size={14} aria-hidden="true" /> Premios y competiciones</span>
+        <ul class="mt-4 grid gap-2 sm:grid-cols-2">
+          {
+            awards.map((a) => {
+              const content = (
+                <>
+                  <span class="place">{a.place}</span>
+                  <span class="min-w-0">
+                    <span class="block leading-snug font-medium">{a.title}</span>
+                    <span class="text-xs text-muted">{a.year}</span>
+                  </span>
+                </>
+              );
+              return (
+                <li>
+                  {a.url ? (
+                    <a href={a.url} target="_blank" rel="noopener" class="award award-link">
+                      {content}
+                    </a>
+                  ) : (
+                    <div class="award">{content}</div>
+                  )}
+                </li>
+              );
+            })
+          }
+        </ul>
+      </div>
+
+      <!-- Redes -->
+      <div class="tile reveal flex flex-col justify-between gap-4" style="--reveal-delay:100ms">
+        <span class="tile-label">Sígueme en mis redes</span>
+        <ul class="grid grid-cols-4 gap-2 md:grid-cols-2">
+          {
+            profile.socials.map((s) => (
+              <li>
+                <a href={s.url} target="_blank" rel="noopener" class="social social-brand" data-network={s.icon} aria-label={`${s.name}: ${s.handle}`}>
+                  <BrandIcon name={s.icon} size={20} />
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Contacto rápido -->
+      <a href="#contacto" class="tile tile-link reveal flex flex-col justify-between gap-6 bg-accent! text-on-accent" style="--reveal-delay:140ms">
+        <span class="text-xs font-semibold tracking-[0.06em] uppercase opacity-80">¿Hablamos?</span>
+        <p class="text-xl leading-tight font-semibold tracking-tight">Escríbeme y te respondo pronto</p>
+        <ArrowRight size={20} class="absolute top-5 right-5" aria-hidden="true" />
+      </a>
+    </div>
+  </section>
+
+  <!-- ===================== PROYECTOS ===================== -->
+  <section id="proyectos" class="container-page mt-24">
+    <div class="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+      <div>
+        <h2 class="section-title">Proyectos</h2>
+        <p class="mt-3 max-w-2xl text-muted">
+          Proyectos desarrollados durante mi formación y en mi tiempo libre. Casi todos están en mi{' '}
+          <a href="https://github.com/juanmariabravo" class="link-underline text-accent-text" target="_blank" rel="noopener">GitHub</a>.
+        </p>
+      </div>
+    </div>
+    <ProjectGrid projects={projects} />
+  </section>
+
+  <!-- ===================== EXPERIENCIA ===================== -->
+  <section id="experiencia" class="container-page mt-24">
+    <h2 class="section-title">Experiencia</h2>
+    <ol class="timeline mt-10">
+      {
+        experience.map((job) => (
+          <li class="reveal">
+            <span class={`dot ${job.current ? 'dot-current' : ''}`} aria-hidden="true" />
+            <div class="tile">
+              <div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+                <h3 class="text-lg leading-snug font-semibold tracking-tight">{job.role}</h3>
+                <p class="shrink-0 text-sm text-muted">{job.period}</p>
+              </div>
+              <p class="mt-1 font-medium text-accent-text">
+                {job.companyUrl ? (
+                  <a href={job.companyUrl} target="_blank" rel="noopener" class="link-underline">
+                    {job.company}
+                  </a>
+                ) : (
+                  job.company
+                )}
+              </p>
+              {job.summary && <p class="mt-3 text-muted">{job.summary}</p>}
+              {job.highlights.length > 0 && (
+                <ul class="mt-3 grid gap-1.5 text-[0.9375rem] text-muted">
+                  {job.highlights.map((h) => (
+                    <li class="flex gap-2.5">
+                      <span class="mt-2.5 size-1 shrink-0 rounded-full bg-current" aria-hidden="true" />
+                      {h}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <!-- ===================== FORMACIÓN ===================== -->
+  <section id="formacion" class="container-page mt-24">
+    <h2 class="section-title">Formación</h2>
+    <div class="mt-10 grid gap-3 sm:gap-4 lg:grid-cols-3">
+      {
+        education.map((e) => (
+          <div class="tile reveal">
+            <p class="text-sm text-muted">{e.period}</p>
+            <h3 class="mt-2 leading-snug font-semibold tracking-tight">{e.title}</h3>
+            <p class="mt-1 text-sm text-muted">{e.center}</p>
+            {e.note && <p class="chip chip-accent mt-4 whitespace-normal!">{e.note}</p>}
+          </div>
+        ))
+      }
+    </div>
+    <div class="tile reveal mt-3 sm:mt-4">
+      <span class="tile-label"><GraduationCap size={14} aria-hidden="true" /> Logros académicos</span>
+      <ul class="mt-3 flex flex-wrap gap-2">
+        {achievements.map((a) => <li class="chip whitespace-normal!">{a}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===================== CONTACTO ===================== -->
+  <section id="contacto" class="container-page mt-24">
+    <div class="grid gap-8 lg:grid-cols-[1fr_1.4fr] lg:gap-12">
+      <div>
+        <h2 class="section-title">Contacto</h2>
+        <p class="mt-4 max-w-md text-muted">
+          ¿Tienes una propuesta, un proyecto o simplemente quieres saludar? Escríbeme por el formulario o directamente por
+          email.
+        </p>
+        <a href={`mailto:${profile.email}`} class="mt-6 inline-flex min-h-11 items-center gap-2.5 font-medium break-all text-accent-text">
+          <Mail size={18} class="shrink-0" aria-hidden="true" />
+          <span class="link-underline">{profile.email}</span>
+        </a>
+        <ul class="mt-6 flex gap-2" aria-label="Redes sociales">
+          {
+            profile.socials.map((s) => (
+              <li>
+                <a href={s.url} class="icon-btn social-brand" data-network={s.icon} target="_blank" rel="noopener" aria-label={s.name}>
+                  <BrandIcon name={s.icon} size={18} />
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <ContactForm />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .pulse {
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  /* ----- Tile "Ahora" con la identidad de M2M (turquesa #00b0c0) ----- */
+  .now-tile {
+    --m2m: #00b0c0;
+    background:
+      radial-gradient(120% 90% at 100% 100%, color-mix(in srgb, var(--m2m) 14%, transparent), transparent 60%),
+      var(--surface);
+  }
+  .now-tile:hover,
+  .now-tile:focus-visible {
+    border-color: color-mix(in srgb, var(--m2m), transparent 45%);
+  }
+  /* Isotipo como marca de agua, recoloreado con el turquesa de la marca */
+  .now-mark {
+    position: absolute;
+    right: -1.75rem;
+    bottom: -1.75rem;
+    width: 8.5rem;
+    aspect-ratio: 1;
+    background: var(--m2m);
+    opacity: 0.12;
+    -webkit-mask: var(--isotipo) center / contain no-repeat;
+    mask: var(--isotipo) center / contain no-repeat;
+    transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1), opacity 0.3s ease;
+    pointer-events: none;
+  }
+  .now-tile:hover .now-mark {
+    transform: rotate(-8deg) scale(1.05);
+    opacity: 0.18;
+  }
+  .logo-dark {
+    display: none;
+  }
+  :global([data-theme='dark']) .logo-light {
+    display: none;
+  }
+  :global([data-theme='dark']) .logo-dark {
+    display: block;
+  }
+  @keyframes pulse {
+    50% {
+      opacity: 0.35;
+    }
+  }
+
+  .featured-img {
+    transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .featured:hover .featured-img {
+    transform: translateY(-6px);
+  }
+  .featured:hover .featured-link {
+    color: var(--accent-text);
+  }
+  /* Captura "asomando" desde el borde inferior del tile */
+  .featured-frame {
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-bottom: 0;
+    border-radius: 0.9rem 0.9rem 0 0;
+    background: var(--surface-2);
+    box-shadow: 0 -10px 30px -12px rgb(0 0 0 / 0.35);
+  }
+
+  .award {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-height: 3.25rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.85rem;
+    background: var(--surface-2);
+    border: 1px solid transparent;
+    transition: border-color 0.2s ease;
+  }
+  .award-link:hover {
+    border-color: color-mix(in srgb, var(--accent), transparent 50%);
+  }
+  .place {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 0.6rem;
+    font-weight: 700;
+    font-size: 0.875rem;
+    background: var(--accent-soft);
+    color: var(--accent-text);
+  }
+
+  .social {
+    display: grid;
+    place-items: center;
+    height: 3rem;
+    border-radius: 0.85rem;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  }
+  .social:hover {
+    transform: translateY(-2px);
+  }
+
+  .timeline {
+    position: relative;
+    display: grid;
+    gap: 1rem;
+    padding-left: 1.75rem;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0.4rem;
+    top: 0.5rem;
+    bottom: 0.5rem;
+    width: 2px;
+    background: linear-gradient(var(--accent), var(--border) 60%);
+    border-radius: 2px;
+  }
+  .timeline > li {
+    position: relative;
+  }
+  .dot {
+    position: absolute;
+    left: -1.75rem;
+    top: 1.65rem;
+    width: 0.95rem;
+    height: 0.95rem;
+    border-radius: 999px;
+    background: var(--bg);
+    border: 2px solid var(--border-strong);
+  }
+  .dot-current {
+    border-color: var(--accent);
+    background: var(--accent);
+    box-shadow: 0 0 0 5px var(--accent-soft);
+  }
+</style>

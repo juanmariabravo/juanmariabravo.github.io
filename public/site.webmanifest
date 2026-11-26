@@ -1,0 +1,15 @@
+{
+  "name": "Juan María Bravo López · Portfolio",
+  "short_name": "Juan María",
+  "description": "Portfolio de Juan María Bravo López, desarrollador de software fullstack.",
+  "lang": "es",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0c10",
+  "theme_color": "#0a72ab",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

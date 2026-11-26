@@ -1,0 +1,15 @@
+---
+import Base from '../layouts/Base.astro';
+import ArrowLeft from '@lucide/astro/icons/arrow-left';
+---
+
+<Base title="Página no encontrada · Juan María Bravo López" description="La página que buscas no existe.">
+  <section class="container-page grid min-h-[60vh] place-items-center text-center">
+    <div>
+      <p class="text-7xl font-bold tracking-tighter text-accent-text sm:text-8xl">404</p>
+      <h1 class="mt-4 text-2xl font-semibold tracking-tight">Esta página no existe</h1>
+      <p class="mt-2 text-muted">Puede que el enlace haya cambiado con la nueva versión del portfolio.</p>
+      <a href="/" class="btn btn-primary mt-8"><ArrowLeft size={18} aria-hidden="true" /> Volver al inicio</a>
+    </div>
+  </section>
+</Base>

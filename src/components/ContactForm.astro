@@ -1,0 +1,139 @@
+---
+import Send from '@lucide/astro/icons/send';
+
+// La access key de Web3Forms es pública por diseño (solo permite enviar al email configurado).
+const ACCESS_KEY = '0ebb2f43-8cee-4a6a-a42f-050887e22b94';
+---
+
+<form class="tile grid gap-4" action="https://api.web3forms.com/submit" method="post" data-contact-form novalidate>
+  <input type="hidden" name="access_key" value={ACCESS_KEY} />
+  <input type="hidden" name="subject" value="Nuevo mensaje desde el portfolio" />
+  <input type="hidden" name="from_name" value="Portfolio juanmariabravo.github.io" />
+  <!-- Honeypot anti-spam: invisible para personas -->
+  <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" />
+
+  <div class="grid gap-4 sm:grid-cols-2">
+    <label class="field">
+      <span>Nombre</span>
+      <input type="text" name="name" required autocomplete="name" />
+    </label>
+    <label class="field">
+      <span>Email</span>
+      <input type="email" name="email" required autocomplete="email" inputmode="email" />
+    </label>
+  </div>
+  <label class="field">
+    <span>Asunto</span>
+    <input type="text" name="custom_subject" required />
+  </label>
+  <label class="field">
+    <span>Mensaje</span>
+    <textarea name="message" rows="6" required></textarea>
+  </label>
+
+  <div class="flex flex-col-reverse items-stretch gap-3 sm:flex-row sm:items-center sm:justify-between">
+    <p class="status text-sm" role="status" aria-live="polite" data-status></p>
+    <button type="submit" class="btn btn-primary sm:min-w-44">
+      <Send size={17} aria-hidden="true" /> <span data-label>Enviar mensaje</span>
+    </button>
+  </div>
+</form>
+
+<style>
+  .field {
+    display: grid;
+    gap: 0.4rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+  .field input,
+  .field textarea {
+    width: 100%;
+    padding: 0.7rem 0.9rem;
+    border-radius: 0.75rem;
+    border: 1px solid var(--border-strong);
+    background: var(--bg);
+    color: var(--text);
+    font-weight: 400;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .field textarea {
+    resize: vertical;
+    min-height: 8rem;
+  }
+  .field input:focus,
+  .field textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-soft);
+  }
+  .field input[aria-invalid='true'],
+  .field textarea[aria-invalid='true'] {
+    border-color: #e5484d;
+  }
+  .status[data-state='ok'] {
+    color: var(--success);
+  }
+  .status[data-state='error'] {
+    color: #e5484d;
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLFormElement>('[data-contact-form]').forEach((form) => {
+    const status = form.querySelector<HTMLElement>('[data-status]')!;
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    const label = form.querySelector<HTMLElement>('[data-label]')!;
+
+    const setStatus = (text: string, state = '') => {
+      status.textContent = text;
+      status.dataset.state = state;
+    };
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      // Validación nativa con mensajes en el propio campo
+      let firstInvalid: HTMLElement | null = null;
+      form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input[required], textarea[required]').forEach((field) => {
+        const valid = field.checkValidity();
+        field.setAttribute('aria-invalid', String(!valid));
+        if (!valid && !firstInvalid) firstInvalid = field;
+      });
+      if (firstInvalid) {
+        (firstInvalid as HTMLElement).focus();
+        setStatus('Revisa los campos marcados.', 'error');
+        return;
+      }
+
+      button.disabled = true;
+      label.textContent = 'Enviando…';
+      setStatus('');
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          headers: { Accept: 'application/json' },
+          body: new FormData(form),
+        });
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok || data.success !== true) {
+          throw new Error(data.message || `Error ${response.status}`);
+        }
+        form.reset();
+        setStatus('¡Mensaje enviado! Te responderé lo antes posible.', 'ok');
+      } catch (error) {
+        setStatus('No se pudo enviar el mensaje. Inténtalo de nuevo o escríbeme por email.', 'error');
+        console.error(error);
+      } finally {
+        button.disabled = false;
+        label.textContent = 'Enviar mensaje';
+      }
+    });
+
+    form.addEventListener('input', (e) => {
+      const target = e.target as HTMLElement;
+      if (target.getAttribute('aria-invalid') === 'true') target.setAttribute('aria-invalid', 'false');
+    });
+  });
+</script>

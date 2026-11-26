@@ -1,0 +1,24 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProjectGrid from '../../components/ProjectGrid.astro';
+import ArrowLeft from '@lucide/astro/icons/arrow-left';
+import { getProjects } from '../../lib/projects';
+
+const projects = await getProjects();
+---
+
+<Base
+  title="Proyectos · Juan María Bravo López"
+  description="Proyectos web, de escritorio, IA y electrónica desarrollados por Juan María Bravo López durante su formación y en su tiempo libre."
+>
+  <section class="container-page pt-6 sm:pt-8">
+    <a href="/" class="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-muted transition-colors hover:text-fg">
+      <ArrowLeft size={16} aria-hidden="true" /> Inicio
+    </a>
+    <h1 class="section-title mt-4">Proyectos</h1>
+    <p class="mt-3 mb-8 max-w-2xl text-muted">
+      {projects.length} proyectos desarrollados durante mi formación y en mi tiempo libre.
+    </p>
+    <ProjectGrid projects={projects} headingLevel={2} />
+  </section>
+</Base>

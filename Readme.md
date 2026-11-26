@@ -1,26 +1,65 @@
-# 🌐 Portfolio de Juan María Bravo López 
+# 🌐 Portfolio de Juan María Bravo López
 
-Este repositorio contiene el código fuente de mi portfolio personal, creado a partir de la plantilla **[iPortfolio de BootstrapMade](https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/)** y personalizado con mi información académica, experiencia y proyectos.
+Portfolio personal construido con **[Astro](https://astro.build)** y **Tailwind CSS**, con diseño tipo *bento*, tema claro/oscuro y una página propia para cada proyecto.
 
-## 🚀 Accede a mi portfolio y conoce más sobre mí
-#### 👉 [Visita mi portfolio aquí](https://juanmariabravo.github.io)
+#### 👉 [Visita mi portfolio](https://juanmariabravo.github.io) · 📃 [CV en PDF](https://juanmariabravo.github.io/assets/cvs/JuanMariaBravo_CV.pdf)
 
-#### 📃 [Accede a mi CV en formato PDF](https://juanmariabravo.github.io/assets/cvs/JuanMariaBravo_CV.pdf)
+> La versión anterior (plantilla iPortfolio de BootstrapMade) se conserva en la etiqueta git **`v1`**:
+> `git checkout v1`
 
-### 📌 Sobre mí
-Soy graduado en **Ingeniería Informática** y estudiante del **Máster Universitario en Ingeniería Informática (MUii)** en la Universidad de Castilla-La Mancha.
+## Desarrollo
 
-Apasionado por la programación competitiva, el desarrollo de software, la ciberseguridad y la resolución de problemas algorítmicos.
+Requiere Node.js ≥ 22.
 
+```bash
+npm install
+npm run dev       # servidor de desarrollo en http://localhost:4321
+npm run build     # genera el sitio estático en dist/
+npm run preview   # sirve dist/ en local
+npm run check     # comprobación de tipos y del esquema de proyectos
+```
+
+## Estructura
+
+| Ruta | Contenido |
+| --- | --- |
+| `src/data/portfolio.json` | Proyectos (se valida con el esquema de `src/content.config.ts`) |
+| `src/data/profile.ts` | Datos personales, stack, experiencia, formación y premios |
+| `src/assets/portfolio/` | Capturas de los proyectos (Astro las convierte a AVIF/WebP) |
+| `src/pages/` | Inicio, listado de proyectos, página de cada proyecto y 404 |
+| `src/components/` | Componentes reutilizables (tarjetas, galería, formulario…) |
+| `public/` | Archivos servidos tal cual: CV, favicon, `robots.txt` y la redirección de enlaces antiguos |
+
+## Añadir un proyecto
+
+1. Copia las capturas en `src/assets/portfolio/<id-del-proyecto>/`.
+2. Añade una entrada en `src/data/portfolio.json`; las rutas de imagen son relativas a `src/assets/`:
+
+```json
+{
+  "id": "mi-proyecto",
+  "title": "Mi proyecto",
+  "category": "Desarrollo Web",
+  "filter": "filter-web, filter-api",
+  "purpose": "Proyecto personal",
+  "featured": false,
+  "date": "2026",
+  "url": "https://github.com/juanmariabravo/mi-proyecto",
+  "demo": "",
+  "description": "<p>Descripción en HTML.</p>",
+  "images": ["portfolio/mi-proyecto/1.png"],
+  "thumbnail": "portfolio/mi-proyecto/1.png",
+  "technologies": ["React", "Node.js"]
+}
+```
+
+Filtros disponibles: `filter-web`, `filter-api`, `filter-datos`, `filter-communication`, `filter-ia`, `filter-desktop`, `filter-electronica`.
+Con `"featured": true` el proyecto aparece en la portada (el primero, en grande). El orden del JSON es el orden de la web.
+
+## Despliegue
+
+Cada push a `main` construye y publica la web con GitHub Actions (`.github/workflows/deploy.yml`).
+Requisito único: en *Settings → Pages → Source* debe estar seleccionado **GitHub Actions**.
 
 ---
-✉️ Contacto: juanmariabravo12@gmail.com
-🔗 GitHub: [@juanmariabravo](https://github.com/juanmariabravo)  
-
-### Información de la plantilla utilizada
-```
-Template Name: iPortfolio
-Template URL: https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/
-Author: BootstrapMade.com
-License: https://bootstrapmade.com/license/
-```
+✉️ juanmariabravo12@gmail.com · 🔗 [GitHub @juanmariabravo](https://github.com/juanmariabravo)

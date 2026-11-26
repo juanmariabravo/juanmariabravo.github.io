@@ -1,0 +1,23 @@
+---
+import BrandIcon from './BrandIcon.astro';
+import { profile } from '../data/profile';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="mt-24 border-t border-line">
+  <div class="container-page flex flex-col items-center justify-between gap-4 py-8 text-sm text-muted sm:flex-row">
+    <p>© {year} {profile.name}</p>
+    <ul class="flex gap-2" aria-label="Redes sociales">
+      {
+        profile.socials.map((s) => (
+          <li>
+            <a href={s.url} class="icon-btn social-brand size-10!" data-network={s.icon} target="_blank" rel="noopener" aria-label={s.name}>
+              <BrandIcon name={s.icon} size={16} />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</footer>

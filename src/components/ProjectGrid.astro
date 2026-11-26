@@ -1,0 +1,107 @@
+---
+import ProjectCard from './ProjectCard.astro';
+import { availableTags, tagLabel, type Project } from '../lib/projects';
+
+interface Props {
+  projects: Project[];
+  headingLevel?: 2 | 3;
+}
+
+const { projects, headingLevel = 3 } = Astro.props;
+const tags = availableTags(projects);
+---
+
+<div data-project-grid>
+  <div class="filters -mx-4 mb-8 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:px-0" role="toolbar" aria-label="Filtrar proyectos">
+    <button type="button" class="filter" data-filter="all" aria-pressed="true">
+      Todos <span class="count">{projects.length}</span>
+    </button>
+    {
+      tags.map((t) => (
+        <button type="button" class="filter" data-filter={t} aria-pressed="false">
+          {tagLabel(t)}
+        </button>
+      ))
+    }
+  </div>
+
+  <p class="sr-only" aria-live="polite" data-filter-status></p>
+
+  <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
+    {
+      projects.map((p, i) => (
+        <li class="reveal" style={`--reveal-delay:${Math.min(i % 3, 2) * 70}ms`} data-item>
+          <ProjectCard project={p} headingLevel={headingLevel} />
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<style>
+  .filters {
+    scrollbar-width: none;
+  }
+  .filters::-webkit-scrollbar {
+    display: none;
+  }
+  @media (max-width: 639px) {
+    .filters {
+      mask-image: linear-gradient(to right, #000 88%, transparent);
+    }
+  }
+  .filter {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 0.4rem;
+    min-height: 2.5rem;
+    padding: 0 1rem;
+    border-radius: 999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--muted);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    transition: all 0.2s ease;
+  }
+  .filter:hover {
+    color: var(--text);
+    border-color: var(--border-strong);
+  }
+  .filter[aria-pressed='true'] {
+    color: var(--on-accent);
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .count {
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-project-grid]').forEach((grid) => {
+    const buttons = grid.querySelectorAll<HTMLButtonElement>('[data-filter]');
+    const items = grid.querySelectorAll<HTMLElement>('[data-item]');
+    const status = grid.querySelector<HTMLElement>('[data-filter-status]');
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const filter = btn.dataset.filter ?? 'all';
+        buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+        let shown = 0;
+        items.forEach((item) => {
+          const tags = item.querySelector<HTMLElement>('[data-tags]')?.dataset.tags?.split(' ') ?? [];
+          const match = filter === 'all' || tags.includes(filter);
+          item.hidden = !match;
+          if (match) {
+            shown++;
+            item.classList.add('is-visible');
+          }
+        });
+        if (status) status.textContent = `${shown} proyectos mostrados`;
+      });
+    });
+  });
+</script>
