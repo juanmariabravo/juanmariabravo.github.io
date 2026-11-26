@@ -89,7 +89,7 @@
       "thumbnail": "assets/img/portfolio/make-it-quiz/1.png",
       "technologies": [
         "Next.js 16.4.6",
-        "React 19y React DOM 19",
+        "React 19 y React DOM 19",
         "TypeScript 5",
         "Tailwind CSS 3",
         "Python",
@@ -117,13 +117,13 @@
       "thumbnail": "assets/img/portfolio/atril/1.png",
       "technologies": [
         "React 19",
-        "Vite",
+        "TanStack Start",
         "Python",
         "FastAPI",
         "Supabase",
         "PostgreSQL",
         "Cloudflare Workers",
-        "IA (OpenRouter and Ollama)",
+        "IA (OpenRouter y Ollama)",
         "jsPDF",
         "DOCX"
       ]
@@ -137,7 +137,7 @@
       "date": "2025/26",
       "url": "https://github.com/LozanoL9/TimeTrade",
       "demo": "",
-      "description": "<p>Plataforma web colaborativa de intercambio de favores basada en un <strong>banco de tiempo</strong>. La aplicación permite a los usuarios ofrecer y solicitar servicios o habilidades, utilizando créditos que se acumulan y canjean dentro de la plataforma.</p><p>Cuenta con un sistema de gestión de perfiles, publicación de ofertas/solicitudes, mensajería integrada o registro de transacciones para asegurar un intercambio fluido y equitativo entre los miembros de la comunidad.</p>",
+      "description": "<p>Plataforma web colaborativa de intercambio de favores basada en un <strong>banco de tiempo</strong>. La aplicación permite a los usuarios ofrecer y solicitar servicios o habilidades, utilizando créditos que se acumulan y canjean dentro de la plataforma.</p><p>Cuenta con un sistema de gestión de perfiles, publicación de ofertas/solicitudes, mensajería integrada y registro de transacciones para asegurar un intercambio fluido y equitativo entre los miembros de la comunidad.</p>",
       "images": [
         "assets/img/portfolio/timetrade-1.png",
         "assets/img/portfolio/timetrade-2.png",

@@ -106,6 +106,25 @@
   }
 
   /**
+   * Edad y año del copyright calculados dinámicamente
+   */
+  const ageElement = document.querySelector('#age[data-birthdate]');
+  if (ageElement) {
+    const [year, month, day] = ageElement.dataset.birthdate.split('-').map(Number);
+    const today = new Date();
+    let age = today.getFullYear() - year;
+    const birthdayPassed = today.getMonth() + 1 > month ||
+      (today.getMonth() + 1 === month && today.getDate() >= day);
+    if (!birthdayPassed) age--;
+    ageElement.textContent = age;
+  }
+
+  const copyrightYear = document.querySelector('#copyright-year');
+  if (copyrightYear) {
+    copyrightYear.textContent = new Date().getFullYear();
+  }
+
+  /**
    * Initiate Pure Counter
    */
   new PureCounter();

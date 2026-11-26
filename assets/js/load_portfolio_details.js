@@ -1,3 +1,19 @@
+function escapeHtml(value) {
+    return String(value ?? '').replace(/[&<>"']/g, character => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+    }[character]));
+}
+
+function stripHtml(html) {
+    const element = document.createElement('div');
+    element.innerHTML = html || '';
+    return element.textContent.replace(/\s+/g, ' ').trim();
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     const params = new URLSearchParams(window.location.search);
     const projectId = params.get('id');
@@ -13,6 +29,14 @@ document.addEventListener('DOMContentLoaded', function () {
             const project = data.projects.find(p => p.id === projectId);
 
             if (project) {
+                // Título y descripción de la pestaña / buscadores
+                document.title = `${project.title} - Juan María Bravo López`;
+                const metaDescription = document.querySelector('meta[name="description"]');
+                const summary = stripHtml(project.description);
+                if (metaDescription && summary) {
+                    metaDescription.setAttribute('content', summary.length > 160 ? summary.slice(0, 157) + '...' : summary);
+                }
+
                 // Populate Images - Usar el selector correcto
                 const swiperWrapper = document.querySelector('.swiper-wrapper');
 
@@ -26,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 project.images.forEach(imgSrc => {
                     const slide = document.createElement('div');
                     slide.className = 'swiper-slide';
-                    slide.innerHTML = `<img src="${imgSrc}" alt="${project.title}" loading="lazy" decoding="async">`;
+                    slide.innerHTML = `<img src="${escapeHtml(imgSrc)}" alt="${escapeHtml(project.title)}" loading="lazy" decoding="async">`;
                     swiperWrapper.appendChild(slide);
                 });
 
@@ -39,12 +63,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 const infoList = document.getElementById('portfolio-info-list');
                 if (infoList) {
                     infoList.innerHTML = `
-                        <li><strong>Categoría</strong>: ${project.category}</li>
-                        <li><strong>Propósito</strong>: ${project.purpose}</li>
-                        <li><strong>Fecha</strong>: ${project.date}</li>
-                        <li><strong>Tecnologías</strong>: ${project.technologies.join(', ')}</li>
-                        ${project.url ? `<li><strong>URL del Proyecto</strong>: <a href="${project.url}" target="_blank" rel="noopener">${project.url}</a></li>` : ''}
-                        ${project.demo ? `<li><strong>Página en producción</strong>: <a href="${project.demo}" target="_blank" rel="noopener">${project.demo}</a></li>` : ''}
+                        <li><strong>Categoría</strong>: ${escapeHtml(project.category)}</li>
+                        <li><strong>Propósito</strong>: ${escapeHtml(project.purpose)}</li>
+                        <li><strong>Fecha</strong>: ${escapeHtml(project.date)}</li>
+                        <li><strong>Tecnologías</strong>: ${escapeHtml((project.technologies || []).join(', '))}</li>
+                        ${project.url && !project.private ? `<li><strong>URL del Proyecto</strong>: <a href="${escapeHtml(project.url)}" target="_blank" rel="noopener">${escapeHtml(project.url)}</a></li>` : ''}
+                        ${project.demo ? `<li><strong>Página en producción</strong>: <a href="${escapeHtml(project.demo)}" target="_blank" rel="noopener">${escapeHtml(project.demo)}</a></li>` : ''}
                         ${project.private ? '<li><strong>Acceso</strong>: Repositorio privado</li>' : ''}
                     `;
                 }
