@@ -14,7 +14,7 @@ Apasionado por la programación competitiva, el desarrollo de software, la ciber
 
 
 ---
-✉️ Contacto: JuanMaria.Bravo@alu.uclm.es
+✉️ Contacto: juanmariabravo12@gmail.com
 🔗 GitHub: [@juanmariabravo](https://github.com/juanmariabravo)  
 
 ### Información de la plantilla utilizada
