@@ -14,12 +14,29 @@
    */
   const headerToggleBtn = document.querySelector('.header-toggle');
 
+  const header = document.querySelector('#header');
+
   function headerToggle() {
-    document.querySelector('#header').classList.toggle('header-show');
-    headerToggleBtn.classList.toggle('bi-list');
-    headerToggleBtn.classList.toggle('bi-x');
+    const isOpen = header.classList.toggle('header-show');
+    headerToggleBtn.classList.toggle('bi-list', !isOpen);
+    headerToggleBtn.classList.toggle('bi-x', isOpen);
+    headerToggleBtn.setAttribute('aria-expanded', String(isOpen));
+    headerToggleBtn.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
   }
   headerToggleBtn.addEventListener('click', headerToggle);
+
+  // Cerrar el menú móvil al tocar fuera de él o al pulsar Escape
+  document.addEventListener('click', (e) => {
+    if (header.classList.contains('header-show') && !header.contains(e.target)) {
+      headerToggle();
+    }
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && header.classList.contains('header-show')) {
+      headerToggle();
+      headerToggleBtn.focus();
+    }
+  });
 
   /**
    * Hide mobile nav on same-page/hash links
@@ -84,7 +101,8 @@
       duration: 600,
       easing: 'ease-in-out',
       once: true,
-      mirror: false
+      mirror: false,
+      disable: () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
     });
   }
   window.addEventListener('load', aosInit);

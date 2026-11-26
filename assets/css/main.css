@@ -241,10 +241,36 @@ h6 {
   .header~#footer {
     margin-left: 300px;
   }
-.header~main .content-wrapper,
-.header~#footer {
-  margin-right: 50px;
 }
+
+/* Barra lateral más compacta en pantallas de poca altura (portátiles de 768px) */
+@media (min-width: 1200px) and (max-height: 860px) {
+  .header .profile-img img {
+    width: 88px;
+    margin: 12px auto 8px;
+    border-width: 6px;
+  }
+
+  .header .logo {
+    margin-bottom: 10px;
+  }
+
+  .header .logo h1 {
+    font-size: 21px;
+  }
+
+  .header .social-links {
+    margin-bottom: 8px;
+  }
+
+  .navmenu a,
+  .navmenu a:focus {
+    padding: 10px 10px;
+  }
+
+  .navmenu ul {
+    padding-bottom: 12px;
+  }
 }
 
 @media (max-width: 1199px) {
@@ -258,6 +284,9 @@ h6 {
 }
 
 .header .header-toggle {
+  border: 0;
+  padding: 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
   color: var(--contrast-color);
   background-color: var(--accent-color);
   font-size: 22px;
@@ -821,130 +850,196 @@ section,
   text-align: center;
 }
 
+/* Filtros como "pills" con área táctil cómoda */
+.portfolio .portfolio-filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+
 .portfolio .portfolio-filters li {
   cursor: pointer;
-  display: inline-block;
-  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 8px 18px;
   font-size: 14px;
-  font-weight: 400;
-  margin: 0 10px;
+  font-weight: 500;
   line-height: 1;
-  text-transform: uppercase;
-  margin-bottom: 10px;
-  transition: all 0.3s ease-in-out;
+  white-space: nowrap;
+  border-radius: 50px;
+  color: var(--default-color);
+  background: var(--surface-color);
+  border: 1px solid color-mix(in srgb, var(--default-color), transparent 85%);
+  transition: all 0.25s ease-in-out;
+  user-select: none;
 }
 
-.portfolio .portfolio-filters li:hover,
-.portfolio .portfolio-filters li.filter-active {
+.portfolio .portfolio-filters li:hover {
   color: var(--accent-color);
+  border-color: var(--accent-color);
 }
 
-.portfolio .portfolio-filters li:first-child {
-  margin-left: 0;
+.portfolio .portfolio-filters li.filter-active {
+  color: var(--contrast-color);
+  background: var(--accent-color);
+  border-color: var(--accent-color);
 }
 
-.portfolio .portfolio-filters li:last-child {
-  margin-right: 0;
+.portfolio .portfolio-filters li:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--accent-color), transparent 50%);
+  outline-offset: 2px;
 }
 
+/* En móvil, los filtros en una sola fila desplazable en horizontal */
 @media (max-width: 575px) {
+  .portfolio .portfolio-filters {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    margin-left: -12px;
+    margin-right: -12px;
+    padding: 2px 12px 6px;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+    -webkit-mask-image: linear-gradient(to right, #000 85%, transparent);
+    mask-image: linear-gradient(to right, #000 85%, transparent);
+  }
+
+  .portfolio .portfolio-filters::-webkit-scrollbar {
+    display: none;
+  }
+
   .portfolio .portfolio-filters li {
-    font-size: 14px;
-    margin: 0 5px;
+    scroll-snap-align: start;
   }
 }
 
-/* Marco para los proyectos del portfolio */
-.portfolio .portfolio-content {
+/* Tarjetas de proyecto: la información siempre visible y toda la tarjeta clicable */
+.portfolio .portfolio-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 10px;
+  background: var(--surface-color);
+  border: 1px solid color-mix(in srgb, var(--default-color), transparent 88%);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+}
+
+.portfolio .portfolio-card:hover,
+.portfolio .portfolio-card:focus-within {
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--accent-color), transparent 50%);
+}
+
+.portfolio .portfolio-thumb {
   position: relative;
   overflow: hidden;
-  border: 2px solid #e0e0e0;
-    border-radius: 4px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    transition: all 0.3s ease-in-out;
-    background: #ffffff;
-  }
-  
-  .portfolio .portfolio-content:hover {
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-    transform: translateY(-3px);
-    border-color: #c0c0c0;
+  background: color-mix(in srgb, var(--default-color), transparent 94%);
 }
 
-.portfolio .portfolio-content img {
-  transition: 0.3s;
+.portfolio .portfolio-thumb img {
   width: 100%;
   height: auto;
   aspect-ratio: 16 / 9;
   object-fit: cover;
   object-position: top;
   display: block;
+  transition: transform 0.4s ease;
 }
 
-.portfolio .portfolio-content .portfolio-info {
-  opacity: 0;
+.portfolio .portfolio-card:hover .portfolio-thumb img {
+  transform: scale(1.04);
+}
+
+.portfolio .portfolio-badge {
   position: absolute;
-  inset: 0;
-  z-index: 3;
-  transition: all ease-in-out 0.3s;
-  background: rgba(0, 0, 0, 0.6);
-  padding: 15px;
-}
-
-.portfolio .portfolio-content .portfolio-info h4 {
-  font-size: 14px;
-  padding: 5px 10px;
-  font-weight: 400;
-  color: #ffffff;
-  display: inline-block;
-  background-color: var(--accent-color);
-}
-
-.portfolio .portfolio-content .portfolio-info p {
-  position: absolute;
-  bottom: 10px;
-  text-align: center;
-  display: inline-block;
-  left: 0;
-  right: 0;
-  font-size: 16px;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  font-size: 12px;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.portfolio .portfolio-content .portfolio-info .details-link {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 34px;
+  border-radius: 50px;
   color: #fff;
-  transition: 0.3s;
-  line-height: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  background: #198754;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
-.portfolio .portfolio-content .portfolio-info .details-link:hover {
+.portfolio .portfolio-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 16px 16px;
+  flex-grow: 1;
+}
+
+.portfolio .portfolio-meta {
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: color-mix(in srgb, var(--default-color), transparent 40%);
+}
+
+.portfolio .portfolio-title {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.3;
+  /* Máximo dos líneas para que las tarjetas tengan altura similar */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: calc(17px * 1.3 * 2);
+}
+
+.portfolio .portfolio-title a {
+  color: var(--heading-color);
+}
+
+.portfolio .portfolio-card:hover .portfolio-title a,
+.portfolio .portfolio-title a:focus-visible {
   color: var(--accent-color);
 }
 
-.portfolio .portfolio-content:hover .portfolio-info,
-.portfolio .portfolio-content:focus-within .portfolio-info {
-  opacity: 1;
+.portfolio .portfolio-title a:focus-visible {
+  outline: none;
 }
 
-/* En pantallas táctiles (sin hover) la información se muestra siempre */
-@media (hover: none) {
-  .portfolio .portfolio-content .portfolio-info {
-    opacity: 1;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.15) 45%, rgba(0, 0, 0, 0.7));
-  }
+.portfolio .portfolio-card:has(.portfolio-title a:focus-visible) {
+  outline: 3px solid color-mix(in srgb, var(--accent-color), transparent 40%);
+  outline-offset: 2px;
 }
 
-.portfolio .portfolio-content:hover img {
-  transform: scale(1.1);
+.portfolio .portfolio-tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  /* Reserva dos líneas de etiquetas para que todas las tarjetas midan lo mismo */
+  min-height: 50px;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.portfolio .portfolio-tags li {
+  font-size: 12px;
+  line-height: 1;
+  padding: 5px 9px;
+  border-radius: 50px;
+  color: color-mix(in srgb, var(--accent-color), #000 25%);
+  background: color-mix(in srgb, var(--accent-color), transparent 88%);
 }
 
 /*--------------------------------------------------------------
@@ -1201,8 +1296,112 @@ section,
 /*--------------------------------------------------------------
 # Portfolio Details Section
 --------------------------------------------------------------*/
+/* Rejilla: galería + descripción a la izquierda, ficha fija a la derecha.
+   En móvil: galería, ficha (con el enlace a la demo) y descripción. */
+.portfolio-details .details-grid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "gallery" "info" "desc";
+}
+
+@media (min-width: 992px) {
+  .portfolio-details .details-grid {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    grid-template-areas: "gallery info" "desc info";
+    align-items: start;
+  }
+
+  .portfolio-details .details-info {
+    position: sticky;
+    top: 24px;
+  }
+}
+
+.portfolio-details .details-gallery { grid-area: gallery; min-width: 0; }
+.portfolio-details .details-info { grid-area: info; }
+.portfolio-details .details-desc { grid-area: desc; }
+
+.portfolio-details .portfolio-details-slider .swiper-slide a {
+  display: block;
+  cursor: zoom-in;
+}
+
 .portfolio-details .portfolio-details-slider img {
   width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: contain;
+  background: color-mix(in srgb, var(--default-color), transparent 95%);
+  border-radius: 8px;
+}
+
+.portfolio-details .portfolio-details-slider .swiper-button-prev,
+.portfolio-details .portfolio-details-slider .swiper-button-next {
+  --swiper-navigation-size: 18px;
+  width: 40px;
+  height: 40px;
+  margin-top: -36px;
+  border-radius: 50%;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.45);
+  transition: background 0.2s;
+}
+
+.portfolio-details .portfolio-details-slider .swiper-button-prev:hover,
+.portfolio-details .portfolio-details-slider .swiper-button-next:hover {
+  background: var(--accent-color);
+}
+
+@media (hover: none) {
+  .portfolio-details .portfolio-details-slider .swiper-button-prev,
+  .portfolio-details .portfolio-details-slider .swiper-button-next {
+    display: none;
+  }
+}
+
+.portfolio-details .zoom-hint {
+  margin: 4px 0 0;
+  text-align: center;
+  font-size: 13px;
+  color: color-mix(in srgb, var(--default-color), transparent 45%);
+}
+
+.portfolio-details .back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  font-weight: 500;
+}
+
+.portfolio-details .portfolio-info .btn-demo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  margin-top: 20px;
+  border-radius: 50px;
+  font-weight: 500;
+  color: var(--contrast-color);
+  background: var(--accent-color);
+  transition: background 0.2s;
+}
+
+.portfolio-details .portfolio-info .btn-demo:hover {
+  background: color-mix(in srgb, var(--accent-color), #000 15%);
+}
+
+.portfolio-details .portfolio-info .btn-demo.btn-outline {
+  color: var(--accent-color);
+  background: transparent;
+  border: 1px solid var(--accent-color);
+  margin-top: 10px;
+}
+
+.portfolio-details .portfolio-info .btn-demo.btn-outline:hover {
+  color: var(--contrast-color);
+  background: var(--accent-color);
 }
 
 .portfolio-details .portfolio-details-slider .swiper-pagination {
@@ -1223,7 +1422,7 @@ section,
 
 .portfolio-details .portfolio-info {
   padding: 30px;
-  margin-bottom: 30px;
+  border-radius: 10px;
   box-shadow: 0px 0 30px rgba(0, 0, 0, 0.1);
   overflow-wrap: break-word;
     word-wrap: break-word;
@@ -1256,6 +1455,7 @@ section,
 
 .portfolio-details .portfolio-description {
   padding: 30px;
+  border-radius: 10px;
   box-shadow: 0px 0 30px rgba(0, 0, 0, 0.1);
 }
 
@@ -1336,47 +1536,138 @@ section,
   color: var(--accent-color);
 }
 
-/* Ocultar scrollbar en todos los navegadores */
-body,
-.header {
-  scrollbar-width: none;
-  /* Firefox */
-  -ms-overflow-style: none;
-  /* Internet Explorer 10+ */
-}
+/*--------------------------------------------------------------
+# Ajustes de responsive y usabilidad
+--------------------------------------------------------------*/
 
-body::-webkit-scrollbar,
-.header::-webkit-scrollbar {
-  display: none;
-  /* Chrome, Safari y Opera */
-}
-
+/* Scrollbar fina y discreta (orientación al hacer scroll), oculta solo en la barra lateral */
 html {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--accent-color), transparent 40%) transparent;
 }
 
 html::-webkit-scrollbar {
-  display: none;
+  width: 8px;
 }
 
-/* Margen derecho para el contenido */
-.content-wrapper {
-  padding-right: 16px;
+html::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--accent-color), transparent 40%);
+  border-radius: 8px;
 }
 
-/* Elimina el margen derecho solo en el hero */
-#hero {
-  padding-right: 0 !important;
-  margin-right: 0 !important;
+html::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-#hero img {
-  width: 100vw;
-  max-width: 100vw;
-  margin-right: 0;
+/* Enlaces de navegación con offset para no quedar pegados al borde superior */
+section[id],
+#experience {
+  scroll-margin-top: 20px;
 }
 
-#hero .container {
-  margin-right: auto !important;
+/* Foco visible para navegación con teclado */
+a:focus-visible,
+button:focus-visible,
+.header-toggle:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--accent-color), transparent 40%);
+  outline-offset: 2px;
+}
+
+/* Botón de CV con el color de marca (antes usaba el azul por defecto de Bootstrap) */
+.resume .btn-primary {
+  --bs-btn-bg: var(--accent-color);
+  --bs-btn-border-color: var(--accent-color);
+  --bs-btn-hover-bg: color-mix(in srgb, var(--accent-color), #000 15%);
+  --bs-btn-hover-border-color: color-mix(in srgb, var(--accent-color), #000 15%);
+  --bs-btn-active-bg: color-mix(in srgb, var(--accent-color), #000 20%);
+  --bs-btn-active-border-color: color-mix(in srgb, var(--accent-color), #000 20%);
+  border-radius: 50px;
+  padding-left: 28px;
+  padding-right: 28px;
+}
+
+@media (max-width: 1199px) {
+  /* El título de las páginas interiores no queda bajo el botón de menú */
+  .page-title h1,
+  .page-title .container {
+    padding-right: 56px;
+  }
+
+  /* Menú móvil por encima del contenido con sombra */
+  .header.header-show {
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+  }
+}
+
+@media (max-width: 768px) {
+  /* En móvil la foto del hero se encuadra hacia la persona */
+  .hero img {
+    object-position: 72% center;
+  }
+
+  /* Texto abajo, sobre un degradado oscuro: la cara queda visible y el texto se lee bien */
+  .hero.section {
+    align-items: flex-end;
+    padding-bottom: 96px;
+  }
+
+  .hero:before {
+    background: linear-gradient(to bottom, rgba(4, 11, 20, 0.05) 35%, rgba(4, 11, 20, 0.85) 85%);
+  }
+
+  .hero h2 {
+    font-size: 36px;
+    line-height: 1.15;
+  }
+
+  .section {
+    padding: 48px 0;
+  }
+
+  .section-title {
+    padding-bottom: 36px;
+  }
+
+  /* Datos personales de "Sobre mí" más compactos */
+  .about .content ul li {
+    margin-bottom: 14px;
+  }
+
+  .contact .info-wrap,
+  .contact .php-email-form {
+    padding: 20px;
+  }
+}
+
+/* Campos de formulario con tamaño cómodo en móvil (16px evita el zoom automático en iOS) */
+.contact .php-email-form input[type=text],
+.contact .php-email-form input[type=email],
+.contact .php-email-form textarea {
+  font-size: 16px;
+}
+
+.contact .php-email-form button[type=submit] {
+  min-height: 44px;
+}
+
+/* Respeta la preferencia de reducir animaciones */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  [data-aos] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }

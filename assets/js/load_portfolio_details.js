@@ -47,10 +47,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 swiperWrapper.innerHTML = ''; // Limpiar contenido existente
 
-                project.images.forEach(imgSrc => {
+                const images = project.images || [];
+                images.forEach((imgSrc, i) => {
                     const slide = document.createElement('div');
                     slide.className = 'swiper-slide';
-                    slide.innerHTML = `<img src="${escapeHtml(imgSrc)}" alt="${escapeHtml(project.title)}" loading="lazy" decoding="async">`;
+                    const alt = `${escapeHtml(project.title)} - captura ${i + 1} de ${images.length}`;
+                    // Cada imagen abre el visor a pantalla completa (zoom útil en móvil)
+                    slide.innerHTML = `<a href="${escapeHtml(imgSrc)}" class="glightbox" data-gallery="project-gallery" aria-label="Ampliar captura ${i + 1}">` +
+                        `<img src="${escapeHtml(imgSrc)}" alt="${alt}" ${i === 0 ? '' : 'loading="lazy"'} decoding="async"></a>`;
                     swiperWrapper.appendChild(slide);
                 });
 
@@ -67,10 +71,21 @@ document.addEventListener('DOMContentLoaded', function () {
                         <li><strong>Propósito</strong>: ${escapeHtml(project.purpose)}</li>
                         <li><strong>Fecha</strong>: ${escapeHtml(project.date)}</li>
                         <li><strong>Tecnologías</strong>: ${escapeHtml((project.technologies || []).join(', '))}</li>
-                        ${project.url && !project.private ? `<li><strong>URL del Proyecto</strong>: <a href="${escapeHtml(project.url)}" target="_blank" rel="noopener">${escapeHtml(project.url)}</a></li>` : ''}
-                        ${project.demo ? `<li><strong>Página en producción</strong>: <a href="${escapeHtml(project.demo)}" target="_blank" rel="noopener">${escapeHtml(project.demo)}</a></li>` : ''}
                         ${project.private ? '<li><strong>Acceso</strong>: Repositorio privado</li>' : ''}
                     `;
+                }
+
+                // Botones de acción grandes (más fáciles de pulsar que una URL larga)
+                const actions = document.getElementById('portfolio-actions');
+                if (actions) {
+                    const buttons = [];
+                    if (project.demo) {
+                        buttons.push(`<a href="${escapeHtml(project.demo)}" class="btn-demo" target="_blank" rel="noopener"><i class="bi bi-box-arrow-up-right"></i> Visitar página</a>`);
+                    }
+                    if (project.url && !project.private) {
+                        buttons.push(`<a href="${escapeHtml(project.url)}" class="btn-demo${project.demo ? ' btn-outline' : ''}" target="_blank" rel="noopener"><i class="bi bi-github"></i> Ver código en GitHub</a>`);
+                    }
+                    actions.innerHTML = buttons.join('');
                 }
 
                 // Populate Description
@@ -80,28 +95,41 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (titleElement) titleElement.textContent = project.title;
                 if (descElement) descElement.innerHTML = project.description;
 
-                // Reinicializar Swiper después de cargar las imágenes
+                // Inicializar Swiper después de insertar las imágenes
                 if (typeof Swiper !== 'undefined') {
-                    setTimeout(() => {
-                        const swiper = new Swiper('.portfolio-details-slider', {
-                            loop: true,
-                            speed: 600,
-                            autoplay: {
-                                delay: 5000
-                            },
-                            slidesPerView: 'auto',
-                            pagination: {
-                                el: '.swiper-pagination',
-                                type: 'bullets',
-                                clickable: true
-                            }
-                        });
-                    }, 100);
+                    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                    new Swiper('.portfolio-details-slider', {
+                        loop: images.length > 1,
+                        speed: 500,
+                        slidesPerView: 1,
+                        spaceBetween: 16,
+                        autoHeight: false,
+                        keyboard: { enabled: true },
+                        autoplay: reduceMotion || images.length < 2 ? false : {
+                            delay: 5000,
+                            pauseOnMouseEnter: true,
+                            disableOnInteraction: true
+                        },
+                        navigation: {
+                            nextEl: '.portfolio-details-slider .swiper-button-next',
+                            prevEl: '.portfolio-details-slider .swiper-button-prev'
+                        },
+                        pagination: {
+                            el: '.portfolio-details-slider .swiper-pagination',
+                            type: 'bullets',
+                            clickable: true
+                        }
+                    });
+                }
+
+                // Visor a pantalla completa para ampliar las capturas
+                if (typeof GLightbox !== 'undefined') {
+                    GLightbox({ selector: '.portfolio-details-slider .glightbox' });
                 }
             } else {
                 const portfolioSection = document.querySelector('.portfolio-details');
                 if (portfolioSection) {
-                    portfolioSection.innerHTML = '<div class="container"><p>Proyecto no encontrado.</p></div>';
+                    portfolioSection.innerHTML = '<div class="container"><p>Proyecto no encontrado.</p><p><a href="index.html#portfolio"><i class="bi bi-arrow-left"></i> Volver al portfolio</a></p></div>';
                 }
             }
         })

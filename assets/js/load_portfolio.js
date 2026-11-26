@@ -17,21 +17,40 @@ function escapeHtml(value) {
     }[character]));
 }
 
+const MAX_VISIBLE_TAGS = 4;
+
 function renderProjectCard(project, index) {
-    const delay = (index + 1) * 100;
+    // Retardo escalonado pero acotado, para que las últimas tarjetas no tarden en aparecer
+    const delay = Math.min(index, 5) * 80;
     const projectFilters = normalizeProjectFilters(project).map(escapeHtml).join(' ');
     const title = escapeHtml(project.title);
+    const technologies = project.technologies || [];
+    const visibleTags = technologies.slice(0, MAX_VISIBLE_TAGS)
+        .map(tech => `<li>${escapeHtml(tech)}</li>`).join('');
+    const hiddenCount = technologies.length - MAX_VISIBLE_TAGS;
+    const moreTag = hiddenCount > 0
+        ? `<li title="${escapeHtml(technologies.slice(MAX_VISIBLE_TAGS).join(', '))}">+${hiddenCount}</li>`
+        : '';
+    const meta = [project.category, project.date].filter(Boolean).map(escapeHtml).join(' · ');
+    const badge = project.demo
+        ? '<span class="portfolio-badge"><i class="bi bi-broadcast"></i> Web Pública</span>'
+        : '';
 
     return `
           <div class="col-lg-4 col-md-6 portfolio-item isotope-item ${projectFilters}" data-aos="fade-up" data-aos-delay="${delay}">
-            <div class="portfolio-content h-100">
-              <img src="${escapeHtml(project.thumbnail)}" class="img-fluid" alt="${title}" loading="lazy" decoding="async">
-              <div class="portfolio-info">
-                <h4>${title}</h4>
-                <p>${escapeHtml((project.technologies || []).join(', '))}</p>
-                <a href="portfolio-details.html?id=${encodeURIComponent(project.id)}" title="Más Detalles" class="details-link" aria-label="Ver detalles de ${title}"><i class="bi bi-link-45deg"></i></a>
+            <article class="portfolio-card">
+              <div class="portfolio-thumb">
+                <img src="${escapeHtml(project.thumbnail)}" alt="Captura de ${title}" loading="lazy" decoding="async">
+                ${badge}
               </div>
-            </div>
+              <div class="portfolio-body">
+                <span class="portfolio-meta">${meta}</span>
+                <h3 class="portfolio-title">
+                  <a href="portfolio-details.html?id=${encodeURIComponent(project.id)}" class="stretched-link">${title}</a>
+                </h3>
+                <ul class="portfolio-tags" aria-label="Tecnologías">${visibleTags}${moreTag}</ul>
+              </div>
+            </article>
           </div>`;
 }
 

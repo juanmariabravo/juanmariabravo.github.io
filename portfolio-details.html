@@ -34,7 +34,7 @@
 <body class="portfolio-details-page">
 
   <header id="header" class="header dark-background d-flex flex-column">
-    <i class="header-toggle d-xl-none bi bi-list"></i>
+    <button type="button" class="header-toggle d-xl-none bi bi-list" aria-label="Abrir menú" aria-controls="navmenu" aria-expanded="false"></button>
 
     <div class="profile-img">
       <img src="assets/img/bravo-lopez_juan-maria-foto-orla.jpg"
@@ -88,26 +88,35 @@
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
 
-        <div class="row gy-4">
+        <a href="index.html#portfolio" class="back-link mb-3"><i class="bi bi-arrow-left"></i> Volver al portfolio</a>
 
-          <div class="col-lg-8">
+        <div class="details-grid">
+
+          <div class="details-gallery">
             <div class="portfolio-details-slider swiper">
 
               <div class="swiper-wrapper align-items-center">
                 <!-- Images will be injected here -->
               </div>
+              <div class="swiper-button-prev" aria-label="Imagen anterior"></div>
+              <div class="swiper-button-next" aria-label="Imagen siguiente"></div>
               <div class="swiper-pagination"></div>
             </div>
+            <p class="zoom-hint"><i class="bi bi-zoom-in"></i> Pulsa una imagen para verla a tamaño completo</p>
           </div>
 
-          <div class="col-lg-4">
-            <div class="portfolio-info" data-aos="fade-up" data-aos-delay="200">
+          <aside class="details-info">
+            <div class="portfolio-info">
               <h3>Información del Proyecto</h3>
               <ul id="portfolio-info-list">
                 <!-- Info will be injected here -->
               </ul>
+              <div id="portfolio-actions"></div>
             </div>
-            <div class="portfolio-description" data-aos="fade-up" data-aos-delay="300">
+          </aside>
+
+          <div class="details-desc">
+            <div class="portfolio-description">
               <h2 id="portfolio-title"></h2>
               <div id="portfolio-description-text">
                 <!-- Description will be injected here -->
